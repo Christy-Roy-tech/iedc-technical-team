@@ -1,0 +1,102 @@
+/* ---- NAVBAR ---- */
+.navbar .navbutton button,
+.navbar .navbutton button:focus {
+    padding: 8px 20px;
+    margin-left: 30px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 14px;
+    border: 2px solid #fff;
+    font-weight: 600;
+}
+
+.navbar .navbutton button:hover,
+.navbar .navbutton button:focus:hover {
+    color: #000;
+    background: #fff;
+}
+
+/* ----- Order Form -------*/
+
+.book-slot-form input, 
+.book-slot-form textarea, 
+.book-slot-form select {
+    border-color: #717171;
+}
+
+/* .book-slot-form .form-floating .form-label {
+    color: #ff0000;
+} */
+
+
+/* ----- Your Orders ------ */
+.search-box {
+    border-radius: 25px;
+    border: 1px solid rgba(0, 0, 0, 0.338);
+}
+
+.search-group input:focus {
+    border-color: #a81b29;
+}
+
+.search-btn {
+    background: #a81b29;
+    border: 0;
+    padding: 12px 34px;
+    color: #fff;
+    transition: 0.4s;
+    border-radius: 30px;
+}
+
+.items {
+    border: 1px solid rgba(0, 0, 0, 0.338);      /* #d84545 */
+    border-radius: 8px;
+    box-shadow: rgba(11, 13, 15, 0.663) 5px 8px 9px -10px;
+}
+
+.items .order-header {
+    background: #faf5f3;
+    border-radius: 8px 8px 0 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.338);
+}
+
+.items img {
+    max-height: 100px;
+}
+
+.my-orders .content h4 {
+    font-weight: 500;
+    font-size: 28px;
+    color: #37517e;
+    line-height: 35px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+@media (max-width: 1024px) {
+    .my-orders .content,
+    .my-orders {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .items img {
+        max-height: 25vh;
+    }
+}
+
+@media (max-width: 992px) {
+    .items img {
+        max-height: 25vh;
+    }
+
+    .my-orders .content {
+        padding-top: 30px;
+    }
+}
+
+@media (max-width: 575px) {
+    .items img {
+        max-height: 25vh;
+    }
+}

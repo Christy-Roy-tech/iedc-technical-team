@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>IEDC LOGIN</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link href="../assets/img/Icons/favicon.ico" rel="icon" />
+    <link href="../assets/css/login.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- login popup -->
+    <div class="wrapper">
+      <span class="icon-close">
+        <ion-icon name="close"></ion-icon>
+      </span>
+
+      <div class="form-box login">
+        <h2>Login</h2>
+        <form>
+          <div class="input-box">
+            <span class="icon"><ion-icon name="mail"></ion-icon></span>
+            <input id="email2" type="text" required />
+            <!-- here it was email but there was a bug -->
+            <label>Email</label>
+          </div>
+          <div class="input-box">
+            <span class="icon"><ion-icon id="showpass2" name="eye-off"></ion-icon></span>
+            <input id="pass2" type="password" required />
+            <label>Password</label>
+          </div>
+          <div class="remember-forgot">
+            <a href="./forgotpass.html" id="forgot">Forgot Password?</a>
+          </div>
+
+          <input type="submit" id="login" class="btn" />
+          <div class="login-register">
+            <p>
+              Don't have an account?
+              <a href="#" class="register-link" >Register </a>
+            </p>
+            <span id="login_failed" style="color: red"></span>
+            <span id="login_success" style="color: green"></span>
+          </div>
+        </form>
+      </div>
+
+      <div class="form-box register">
+        <h2>Registration</h2>
+        <form>
+          <div class="input-box">
+            <span class="icon"><ion-icon name="mail"></ion-icon></span>
+            <input id="email1" type="email" required />
+            <label>Email</label>
+          </div>
+          <div class="input-box">
+            <span class="icon"><ion-icon id="showpass1" name="eye-off"></ion-icon></span>
+            <input id="pass1" type="password" required />
+            <label>Password</label>
+          </div>
+          <div class="input-box">
+            <span class="icon"><ion-icon id="showpass3" name="eye-off"></ion-icon></span>
+            <input id="pass3" type="password" required />
+            <label>Re-enter Password</label>
+          </div>
+
+          <input type="submit" id="submit" class="btn" />
+          <div class="login-register">
+            <p>
+              Already have an account?
+              <a href="#" class="login-link">Login</a>
+            </p>
+            <span id="login_failed2" style="color: red"></span>
+            <span id="login_success2" style="color: green"></span>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="../assets/js/login.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../assets/js/firebase.js"></script>
+    <script type="module" src="../assets/js/login_main.js"></script>
+  </body>
+</html>

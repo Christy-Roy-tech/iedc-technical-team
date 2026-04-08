@@ -1,0 +1,85 @@
+.events .event {
+    position: relative;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 15px;
+    background: #faf5f3;
+    transition: 0.5s;
+    height: 100%;
+}
+
+
+.add-event-form .dt-label {
+    color: #6d6d6f;
+}
+
+.add-event-form .form-floating textarea {
+    height: 120px;
+}
+
+.add-event .add-event-form button[type="submit"] {
+    background: #a81b29;
+    border: 0;
+    padding: 12px 34px;
+    color: #fff;
+    transition: 0.4s;
+    border-radius: 30px;
+}
+
+.add-event .add-event-form button[type="submit"]:hover {
+    background: #590900;
+    /* #209dd8 */
+}
+
+@media (max-width: 1024px) {
+
+    .add-event .content,
+    .add-event {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 992px) {
+    .add-event .content {
+        padding-top: 30px;
+    }
+}
+
+
+/* ===== Order Info ======  */
+.accordion-item {
+    border-radius: 5px;
+    border: 0.5px solid rgba(0, 0, 0, 0.41);
+}
+
+.accordion-header button {
+    background-color: #faf5f3 !important;
+}
+
+.accordion-header img {
+    width: 130px;
+    aspect-ratio: 4/3;
+    object-fit: contain;
+}
+
+.accordion-header button {
+    background: #fff;        /* #faf5f3 */
+}
+
+.accordion-header button:focus {
+    background: #fff;
+}
+
+
+/* ========= ADMIN EDIT =========== */
+#event-data {
+    display: none;
+}
+
+
+/* ========= VIEW IDEAS ==========  */
+
+.accordion-item {
+    margin-bottom: 10px;
+}

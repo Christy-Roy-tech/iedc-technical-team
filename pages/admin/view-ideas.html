@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Admin page</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="../../assets/img/Icons/favicon.ico" rel="icon" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="../../assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="../../assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../../assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../../assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="../../assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link
+      href="../../assets/vendor/swiper/swiper-bundle.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <!-- Template Main CSS File -->
+    <link href="../../assets/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../assets/css/admin.css" />
+  </head>
+
+  <body>
+    <main id="info-events">
+      <!-- ======= Header ======= -->
+      <header id="header" class="fixed-top header-inner-pages">
+        <div class="container d-flex align-items-center">
+          <a href="../../index.html" class="logo me-auto"
+            ><img
+              src="../../assets/img/Icons/logo1.png"
+              alt="IEDC LOGO"
+              class="img-fluid"
+          /></a>
+
+          <nav id="navbar" class="navbar">
+            <ul>
+              <li class="dropdown">
+                <a class="nav-link" href="./admin.html"
+                  ><span>Events</span> <i class="bi bi-chevron-down"></i
+                ></a>
+                <ul>
+                  <li class="dropdown">
+                    <a class="nav-link scrollto" href="./admin.html"
+                      ><span>View events</span>
+                      <i class="bi bi-chevron-right"></i
+                    ></a>
+                    <ul>
+                      <li>
+                        <a
+                          class="nav-link scrollto"
+                          href="./admin.html#active-events"
+                          >Active events</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          class="nav-link scrollto"
+                          href="./admin.html#non-active"
+                          >Non active events</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a class="nav-link" href="./admin_add.html">Add events</a>
+                  </li>
+                  <li>
+                    <a class="nav-link" href="./admin_edit.html"
+                      >Update events</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a class="nav-link" href="./admin_manageev.html"
+                  ><span>Manage events</span> <i class="bi bi-chevron-down"></i
+                ></a>
+                <ul>
+                  <li>
+                    <a class="nav-link" href="./admin_manageev.html#non-active"
+                      >Make event non active</a
+                    >
+                  </li>
+                  <li>
+                    <a class="nav-link" href="./admin_manageev.html#make-active"
+                      >Make event active</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="nav-link"
+                      href="./admin_manageev.html#remove-event"
+                      >Remove event</a
+                    >
+                  </li>
+                </ul>
+              </li>
+
+              <li class="dropdown">
+                <a class="nav-link scrollto" href="./manorder-open.html"
+                  ><span>Manage orders</span> <i class="bi bi-chevron-down"></i
+                ></a>
+                <ul>
+                  <li>
+                    <a class="nav-link active" href="./manorder-open.html"
+                      >Open orders</a
+                    >
+                  </li>
+                  <li>
+                    <a class="nav-link" href="./manorder-closed.html">
+                      Closed orders
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <a class="nav-link scrollto" href="#idea-management"
+                  >View Ideas</a
+                >
+              </li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav>
+          <!-- .navbar -->
+        </div>
+      </header>
+      <!-- End Header -->
+
+      <!-- ======= Breadcrumbs ======= -->
+      <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="../../index.html">Home</a></li>
+            <li>Admin Page</li>
+          </ol>
+          <h2>View Ideas</h2>
+        </div>
+      </section>
+      <!-- End Breadcrumbs -->
+
+      <!-- =========== View Ideas ============= -->
+      <section id="idea-management" class="idea-management">
+        <div class="section-title">
+          <h2>Idea Portal responses</h2>
+        </div>
+        <div class="container">
+          <!-- <h5>View the ideas submitted through idea portal</h5> -->
+          <div
+            class="accordion accordion-flush"
+            id="accordionFlushExample"
+          ></div>
+        </div>
+      </section>
+      <!-- --- End View Ideas ---- -->
+    </main>
+    <!-- End main -->
+
+    <div id="filler"></div>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="align-items-baseline">
+      <div class="container footer-bottom clearfix">
+        <div class="copyright">
+          &copy; Copyright <strong><span>2023</span></strong>
+        </div>
+        <div class="credits">
+          Designed & Developed by
+          <a href="../devteam.html" class="thub">TINKERHUB@SAINTGITS</a>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+    <div id="preloader"></div>
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="../../assets/vendor/aos/aos.js"></script>
+    <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../../assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="../../assets/vendor/php-email-form/validate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/filler.js"></script>
+    <script type="module" src="../../assets/js/restrict.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-auth.js"></script>
+    <!-- <script src="../../assets/js/admin_open.js"></script> -->
+    <script type="module" src="../../assets/js/adminlogout.js"></script>
+    <script type="module" src="../../assets/js/admin_ideas_view.js"></script>
+  </body>
+</html>

@@ -1,0 +1,203 @@
+/* .container2 {
+    padding-right: calc(var(1.5rem) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+} */
+
+a {
+  text-decoration: none;
+}
+
+.main-section {
+  padding-top: 8vh;
+  height: 100vh;
+  background: linear-gradient(#171e30, #22346d);
+}
+
+.back-btn {
+  text-decoration: none;
+  color: white;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+}
+
+.back-btn:hover {
+  cursor: pointer;
+  color: rgb(164, 184, 254);
+}
+
+.thub {
+  text-decoration: none;
+  color: rgb(206, 250, 255);
+}
+
+.thub:hover {
+  color: rgb(164, 184, 254);
+}
+
+.main-section .avatar-section {
+  padding-top: 10vh;
+  margin-left: 5%;
+}
+
+.avatar + .avatar {
+  padding-left: 10vw; /* change this value to change distance bewteen avatar */
+}
+
+.hr-main {
+  background-color: red;
+  height: 3px;
+}
+
+.avatar {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.avatar img {
+  height: 40vh;
+}
+
+.avatar:hover {
+  transform: scale(1.1);
+}
+
+.av-name {
+  color: rgba(255, 255, 255, 0.514);
+  font-size: 18px;
+  line-height: 1;
+}
+
+@media (min-width: 1024px) {
+  .main-section .avatar-section::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .main-section .avatar-section {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    margin-left: -5%;
+    margin-right: -5%;
+    padding-left: 8%;
+    padding-right: 8%;
+  }
+}
+
+/* ======== Single Person ======== */
+
+.inactive {
+  display: none;
+  opacity: 0;
+}
+
+.single-person {
+  background: 0;
+  height: 100vh;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /*
+    justify-content: center;
+    align-items: center; */
+  /* opacity: 1; */
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.avatar-zoomed {
+  /* height: 100vh; */ /* uncomment if close button is displayed */
+  /* overflow: hidden; */ /* uncomment to show only top part*/
+  position: relative;
+  bottom: 0;
+}
+
+.avatar-zoomed img {
+  position: absolute;
+  top: 10vh;
+  /* left: 20vh; */
+}
+
+.avatar-text {
+  margin-top: 20vh;
+  color: white;
+}
+
+.hr-avatar {
+  color: white;
+  height: 2px;
+}
+
+.social {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.social a {
+  transition: ease-in-out 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  width: 32px;
+  height: 32px;
+  background: #eff2f8;
+  text-decoration: none;
+}
+
+.social a i {
+  color: #7e3751;
+  font-size: 16px;
+  margin: 0 2px;
+}
+
+.social a:hover {
+  background: #a81b30;
+}
+
+.social a:hover i {
+  color: #fff;
+}
+
+.social a + a {
+  margin-left: 18px;
+}
+
+/* =========== Close Button =========== */
+.close-btn {
+  position: fixed;
+  top: -25px;
+  left: 46%;
+}
+
+.close-btn a {
+  transition: ease-in-out 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid white;
+  background: 0;
+  text-decoration: none;
+}
+
+.close-btn a i {
+  color: white;
+  font-size: 18px;
+  margin: 0 2px;
+}
+
+.close-btn a:hover {
+  background: rgba(255, 255, 255, 0.148);
+}
+
+.close-btn a:hover i {
+  color: white;
+}
