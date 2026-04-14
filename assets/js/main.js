@@ -135,6 +135,14 @@
   window.addEventListener("load", navbarlinksActive);
   onscroll(document, navbarlinksActive);
 
+  const setActiveNavLink = (linkEl) => {
+    if (!linkEl) return;
+
+    let navLinks = select("#navbar .scrollto", true);
+    navLinks.forEach((link) => link.classList.remove("active"));
+    linkEl.classList.add("active");
+  };
+
   /**
    * Scrolls to an element with header offset
    */
@@ -235,10 +243,20 @@
     "click",
     ".scrollto",
     function (e) {
-      if (select(this.hash)) {
+      if (this.hash && this.hash !== "#" && select(this.hash)) {
         e.preventDefault();
 
+        setActiveNavLink(this);
+        this.blur();
+
         let navbar = select("#navbar");
+        if (navbar) {
+          navbar.classList.add("nav-click-lock");
+          window.setTimeout(() => {
+            navbar.classList.remove("nav-click-lock");
+          }, 420);
+        }
+
         if (navbar.classList.contains("navbar-mobile")) {
           navbar.classList.remove("navbar-mobile");
           let navbarToggle = select(".mobile-nav-toggle");
@@ -343,18 +361,50 @@
   /**
    * Portfolio details slider
    */
-  new Swiper(".portfolio-details-slider", {
-    speed: 400,
-    loop: true,
-    // autoplay: {
-    //   delay: 3000,
-    //   disableOnInteraction: true,
-    // },
-    pagination: {
-      el: ".swiper-pagination",
-      type: "bullets",
-      clickable: true,
-    },
+  const detailSliders = select(".portfolio-details-slider", true);
+  detailSliders.forEach((sliderEl) => {
+    const paginationEl = sliderEl.querySelector(".swiper-pagination");
+    const isAboutSlider = sliderEl.classList.contains("about-slider");
+
+    const sliderConfig = {
+      speed: isAboutSlider ? 520 : 400,
+      loop: !isAboutSlider,
+      watchOverflow: true,
+      pagination: paginationEl
+        ? {
+            el: paginationEl,
+            type: "bullets",
+            clickable: true,
+          }
+        : undefined,
+    };
+
+    if (isAboutSlider) {
+      const aboutSection = sliderEl.closest(".about");
+      const nextButton = aboutSection
+        ? aboutSection.querySelector(".about-swiper-next")
+        : null;
+      const prevButton = aboutSection
+        ? aboutSection.querySelector(".about-swiper-prev")
+        : null;
+
+      sliderConfig.autoHeight = true;
+      sliderConfig.grabCursor = true;
+      sliderConfig.spaceBetween = 18;
+      sliderConfig.keyboard = {
+        enabled: true,
+        onlyInViewport: true,
+      };
+
+      if (nextButton && prevButton) {
+        sliderConfig.navigation = {
+          nextEl: nextButton,
+          prevEl: prevButton,
+        };
+      }
+    }
+
+    new Swiper(sliderEl, sliderConfig);
   });
 
   /**
