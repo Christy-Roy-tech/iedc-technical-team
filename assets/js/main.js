@@ -33,6 +33,85 @@
     el.addEventListener("scroll", listener);
   };
 
+  const decorateAuthButtons = () => {
+    let authButtons = select(
+      "#Dashboard, #loginButton, #SignOut, #loginButtonContainer a, #SignOutContainer a",
+      true
+    );
+    authButtons.forEach((btn) => {
+      btn.classList.add("nav-auth-chip");
+    });
+  };
+
+  const enhanceNavbarMarkup = () => {
+    let header = select("#header");
+    let nav = select("#navbar");
+    if (!header || !nav) return;
+
+    let shell = select("#header > .container");
+    if (shell) shell.classList.add("nav-shell");
+
+    let logo = select("#header .logo");
+    if (logo) logo.classList.add("nav-brand");
+
+    let authAnchor = select("#navbar #loginButtonContainer")
+      ? select("#navbar #loginButtonContainer")
+      : select("#navbar #SignOutContainer");
+    let authLi = authAnchor ? authAnchor.closest("li") : null;
+    if (authLi) authLi.classList.add("nav-auth-item");
+
+    let dashboard = select("#Dashboard");
+    if (dashboard) dashboard.classList.add("nav-auth-chip");
+
+    let topLinks = select("#navbar > ul > li > a.nav-link", true);
+    topLinks.forEach((link) => {
+      if (link.classList.contains("nav-hover-link")) return;
+      if (link.closest(".dropdown")) return;
+      if (link.querySelector(".nav-text-stack")) return;
+
+      let text = (link.textContent || "").trim();
+      if (!text) return;
+
+      link.classList.add("nav-hover-link");
+      link.textContent = "";
+
+      let stack = document.createElement("span");
+      stack.className = "nav-text-stack";
+
+      let first = document.createElement("span");
+      first.textContent = text;
+      let second = document.createElement("span");
+      second.textContent = text;
+
+      stack.appendChild(first);
+      stack.appendChild(second);
+      link.appendChild(stack);
+    });
+
+    decorateAuthButtons();
+  };
+
+  enhanceNavbarMarkup();
+
+  let loginContainer = select("#loginButtonContainer");
+  let signoutContainer = select("#SignOutContainer");
+  if (window.MutationObserver && (loginContainer || signoutContainer)) {
+    const authObserver = new MutationObserver(() => {
+      enhanceNavbarMarkup();
+    });
+
+    if (loginContainer) {
+      authObserver.observe(loginContainer, { childList: true, subtree: true });
+    }
+
+    if (signoutContainer) {
+      authObserver.observe(signoutContainer, {
+        childList: true,
+        subtree: true,
+      });
+    }
+  }
+
   /**
    * Navbar links active state on scroll
    */
@@ -105,10 +184,33 @@
   /**
    * Mobile nav toggle
    */
+  let headerShapeTimeout;
+  const syncHeaderShape = () => {
+    let header = select("#header");
+    let navbar = select("#navbar");
+    if (!header || !navbar) return;
+
+    if (headerShapeTimeout) {
+      clearTimeout(headerShapeTimeout);
+    }
+
+    if (navbar.classList.contains("navbar-mobile")) {
+      header.classList.add("nav-open");
+      return;
+    }
+
+    headerShapeTimeout = setTimeout(() => {
+      if (!navbar.classList.contains("navbar-mobile")) {
+        header.classList.remove("nav-open");
+      }
+    }, 300);
+  };
+
   on("click", ".mobile-nav-toggle", function (e) {
     select("#navbar").classList.toggle("navbar-mobile");
     this.classList.toggle("bi-list");
     this.classList.toggle("bi-x");
+    syncHeaderShape();
   });
 
   /**
@@ -142,6 +244,7 @@
           let navbarToggle = select(".mobile-nav-toggle");
           navbarToggle.classList.toggle("bi-list");
           navbarToggle.classList.toggle("bi-x");
+          syncHeaderShape();
         }
         scrollto(this.hash);
       }
@@ -158,6 +261,7 @@
         scrollto(window.location.hash);
       }
     }
+    syncHeaderShape();
   });
 
   /**
@@ -257,11 +361,25 @@
    * Animation on scroll
    */
   window.addEventListener("load", () => {
+    let contentImages = select("main img", true);
+    contentImages.forEach((img) => {
+      img.setAttribute("loading", "lazy");
+      img.setAttribute("decoding", "async");
+    });
+
+    const reduceMotion =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     AOS.init({
-      duration: 1000,
-      easing: "ease-in-out",
+      duration: 550,
+      easing: "ease-out-cubic",
       once: true,
       mirror: false,
+      offset: 60,
+      disable: reduceMotion || window.innerWidth < 768,
+      debounceDelay: 50,
+      throttleDelay: 99,
     });
   });
 })();

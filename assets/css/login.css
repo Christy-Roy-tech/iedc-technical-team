@@ -1,10 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+@import url("./tokens.css");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-base);
 }
 
 body {
@@ -35,10 +36,10 @@ header {
   width: 400px;
   height: 440px;
   background: rgba(0, 0, 0, 0.6);
-  border: 2px solid #b5b5b5;
-  border-radius: 20px;
+  border: 2px solid rgba(181, 181, 181, 0.9);
+  border-radius: var(--radius-lg);
   backdrop-filter: blur(20px);
-  box-shadow: 0 0 30px rgba(156, 156, 156, 0.55);
+  box-shadow: var(--shadow-login);
   /* box-shadow: rgba(249, 13, 13, 0.16) 0px 3px 6px,
     rgba(239, 38, 38, 0.23) 0px 3px 6px; */
   display: flex;
@@ -89,20 +90,20 @@ header {
   right: 0px;
   width: 45px;
   height: 45px;
-  background: #c11b0cd9;
+  background: rgba(168, 27, 41, 0.85);
   font-size: 2em;
-  color: #ffffffef;
+  color: var(--color-white);
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom-left-radius: 20px;
+  border-bottom-left-radius: var(--radius-lg);
   cursor: pointer;
   z-index: 1;
 }
 
 .form-box h2 {
   font-size: 2em;
-  color: #ffffff;
+  color: var(--color-white);
   text-align: center;
 }
 
@@ -110,7 +111,7 @@ header {
   position: relative;
   width: 100%;
   height: 50px;
-  border-bottom: 2px solid #ffffff;
+  border-bottom: 2px solid var(--color-white);
   margin: 30px 0;
 }
 
@@ -121,7 +122,7 @@ header {
   transform: translateY(-50%);
   font-size: 1em;
   font-weight: 500;
-  color: #ffffff;
+  color: var(--color-white);
   pointer-events: none;
   transition: 0.5s;
 }
@@ -141,7 +142,7 @@ header {
   border: none;
   outline: none;
   font-size: 1em;
-  color: #ffffff;
+  color: var(--color-white);
   font-weight: 600;
   padding: 0 35px 0 5px;
 }
@@ -150,13 +151,13 @@ header {
   position: absolute;
   right: 8px;
   font-size: 1.2em;
-  color: #fefefe;
+  color: var(--color-white);
   line-height: 57px;
 }
 
 .remember-forgot {
   font-size: 0.9em;
-  color: #ffffff;
+  color: var(--color-white);
   font-weight: 500;
   margin: -15px 0 15px;
   display: flex;
@@ -164,7 +165,7 @@ header {
 }
 
 .remember-forgot label input {
-  accent-color: #ffffff;
+  accent-color: var(--color-white);
   margin-right: 3px;
 }
 
@@ -180,27 +181,31 @@ header {
 .btn {
   width: 100%;
   height: 45px;
-  background: #c11b0cd9;
+  background: var(--color-primary);
   border: none;
   outline: none;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   font-size: 1em;
-  color: #fff;
+  color: var(--color-white);
   font-weight: 500;
   cursor: pointer;
   transition: 0.5s;
 }
 
+.btn:hover {
+  background: var(--color-primary-strong);
+}
+
 .login-register {
   font-size: 0.9em;
-  color: #ffffff;
+  color: var(--color-white);
   font-weight: 500;
   margin: 25px 0 10px;
   text-align: center;
 }
 
 .login-register p a {
-  color: #fb4545; /* #f4f6f7 */
+  color: var(--color-accent); /* #f4f6f7 */
   text-decoration: none;
   font-weight: 550;
 }

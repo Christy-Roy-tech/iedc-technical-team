@@ -38,40 +38,75 @@
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <header id="header" class="fixed-top">
-            <div class="container d-flex align-items-center">
-                <a href="index.html" class="logo me-auto"><img src="assets/img/Icons/logo1.png" alt="IEDC LOGO"
-                    class="img-fluid" /></a>
+            <div class="container nav-shell d-flex align-items-center">
+                <a href="index.html" class="logo nav-brand" aria-label="IEDC Home">
+                    <span class="logo-dots" aria-hidden="true">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    <span class="brand-text">IEDC</span>
+                </a>
 
-                <!-- NAV BAR -->
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                        <li><a class="nav-link scrollto" href="#about">About</a></li>
-                        <li><a class="nav-link scrollto" href="#team">Team</a></li>
-                        <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                        <li><a class="nav-link scrollto" href="#idea-portal">Idea Portal</a></li>
-                        <li><a class="nav-link scrollto" href="#portfolio">Gallery</a></li>
-
-                        <li><a class="nav-link scrollto" href="#pricing">Events</a></li>
                         <li>
-                            <a class="nav-link scrollto active" href="#faq">Startups</a>
+                            <a class="nav-link scrollto nav-hover-link active" href="#hero">
+                                <span class="nav-text-stack"><span>Home</span><span>Home</span></span>
+                            </a>
                         </li>
-                        <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-
                         <li>
-                            <a id="Dashboard" class="nav-link scrollto fw-bold" href="./pages/user/user-dashboard.html"
-                                style="color: #019eea;">
-                                    My dashboard</a>
+                            <a class="nav-link scrollto nav-hover-link" href="#about">
+                                <span class="nav-text-stack"><span>About</span><span>About</span></span>
+                            </a>
                         </li>
-
                         <li>
+                            <a class="nav-link scrollto nav-hover-link" href="#team">
+                                <span class="nav-text-stack"><span>Team</span><span>Team</span></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link scrollto nav-hover-link" href="#services">
+                                <span class="nav-text-stack"><span>Services</span><span>Services</span></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link scrollto nav-hover-link" href="#idea-portal">
+                                <span class="nav-text-stack"><span>Ideas</span><span>Ideas</span></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link scrollto nav-hover-link" href="#portfolio">
+                                <span class="nav-text-stack"><span>Gallery</span><span>Gallery</span></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link scrollto nav-hover-link" href="#pricing">
+                                <span class="nav-text-stack"><span>Events</span><span>Events</span></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link scrollto nav-hover-link" href="#faq">
+                                <span class="nav-text-stack"><span>Startups</span><span>Startups</span></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link scrollto nav-hover-link" href="#contact">
+                                <span class="nav-text-stack"><span>Contact</span><span>Contact</span></span>
+                            </a>
+                        </li>
+                        <li class="nav-auth-item">
+                            <a id="Dashboard" class="nav-link scrollto fw-bold dashboard-link nav-auth-chip" href="./pages/user/user-dashboard.html">
+                                My dashboard
+                            </a>
                             <div id="loginButtonContainer"></div>
                             <div id="SignOutContainer"></div>
                         </li>
-
                     </ul>
-                    <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav>
+
+                <i class="bi bi-list mobile-nav-toggle" aria-label="Toggle navigation"></i>
             </div>
         </header>
         <!-- End Header -->
@@ -159,7 +194,7 @@
                                         <div class="section-title">
                                             <h2>Our Vision</h2>
                                         </div>
-                                        <p style="text-align: center;">
+                                        <p class="about-centered-copy">
                                             To create an innovation culture among innovators by introducing them to State-of-the-art
                                             technologies and positioning the Institution as a Learning and Innovation Platform by delivering
                                             technically competent and skilled Entrepreneurs.
@@ -169,7 +204,7 @@
                                         <div class="section-title">
                                             <h2>Our Mission</h2>
                                         </div>
-                                        <p style="text-align: center;">
+                                        <p class="about-centered-copy">
                                             To create IEDC as an Innovation Platform and to create future founders by promoting Innovation,
                                             Technology and Business Learning among student community.
                                         </p>
@@ -198,52 +233,13 @@
                         <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="100">
                             <div class="member d-flex align-items-start nodal">
                                 <div class="pic">
-                                    <img src="assets/img/Icons/resize/vkv.webp" class="img-fluid" alt="" />
-                                </div>
-                                <div class="member-info faculty-text">
-                                    <h4>Er. Vinayakumar B</h4>
-                                    <span>Nodal Officer</span>
-                                    <p>
-                                        Nodal Officer Er. Vinayakumar B takes the helm of all the activities of IEDC@SAINTGITS.
-                                    </p>
-                                    <div class="social">
-                                        <!--<a href=""><i class="ri-twitter-fill"></i></a> -->
-                                        <a><i class="ri-instagram-fill"></i></a>
-                                        <a href="https://www.linkedin.com/in/vinayakumar-b-41b4a04a/"> <i class="ri-linkedin-box-fill"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="200">
-                                                    <div class="member d-flex align-items-start nodal">
-                                                        <div class="pic">
-                                                            <img src="assets/img/Icons/resize/sneha.jpeg" class="img-fluid" alt="" />
-                                                        </div>
-                                                        <div class="member-info faculty-text">
-                                                            <h4>Er. Sneha M Varghese</h4>
-                                                            <span>Asst. Nodal Officer</span>
-                                                            <p>
-                                                                Coordinating key activities and ensuring smooth execution of assigned tasks with effective team collaboration.
-                                                            </p>
-                                                            <div class="social">
-                                                                <a><i class="ri-instagram-fill"></i></a>
-                                                                <a href="https://www.linkedin.com/in/chinn-mohanan-914b3341/"> <i class="ri-linkedin-box-fill"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div><div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="200">
-                            <div class="member d-flex align-items-start nodal">
-                                <div class="pic">
                                     <img src="assets/img/Icons/resize/chin.webp" class="img-fluid" alt="" />
                                 </div>
                                 <div class="member-info faculty-text">
                                     <h4>Er. Chinn Mohan</h4>
-                                    <span>Asst. Nodal Officer</span>
+                                    <span>Nodal Officer</span>
                                     <p>
-                                        Dedicated and experienced, Er. Chinn Mohanan serves as Asst. Nodal Officer of IEDC@SAINTGITS.
+                                        Dedicated and experienced, Er. Chinn Mohanan serves as Nodal Officer of IEDC@SAINTGITS.
                                     </p>
                                     <div class="social">
                                         <a><i class="ri-instagram-fill"></i></a>
@@ -254,225 +250,29 @@
                             </div>
                         </div>
 
+                        <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="member d-flex align-items-start nodal">
+                                <div class="pic">
+                                    <img src="assets/img/Icons/resize/maria-binoy.jpg" class="img-fluid" alt="" />
+                                </div>
+                                <div class="member-info faculty-text">
+                                    <h4>Er. Maria Binoy</h4>
+                                    <span>Asst. Nodal Officer</span>
+                                    <p>
+                                        Supports IEDC@SAINTGITS activities by coordinating faculty-level initiatives and execution.
+                                    </p>
+                                    <div class="social">
+                                        <a><i class="ri-instagram-fill"></i></a>
+                                        <a><i class="ri-linkedin-box-fill"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- ======= STUDENT EXECOM ======= -->
                         <h3 class="pt-5 text-center">EXECOM 2025-2026</h3>
-                        <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="100">
-                            <div class="member d-flex align-items-start">
-                                <div class="pic">
-                                    <img src="assets/img/execom/2526/steny-thankkam-raju.jpeg" class="img-fluid" alt="" />
-                                </div>
-                                <div class="member-info">
-                                    <h4>Steny Thankkam Raju</h4>
-                                    <span>Student Lead I</span>
-                                    <p>
-                                        Manages IEDC to ensure efficient execution and effective team coordination.
-                                    </p>
-                                    <div class="social">
-                                        <a href="#"><i class="ri-instagram-fill"></i></a>
-                                        <a href="#"> <i class="ri-linkedin-box-fill"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="200">
-                            <div class="member d-flex align-items-start">
-                                <div class="pic">
-                                    <img src="assets/img/execom/2526/mathew-tito.jpeg" class="img-fluid" alt="" />
-                                </div>
-                                <div class="member-info">
-                                    <h4>Mathew Tito</h4>
-                                    <span>Student Lead II</span>
-                                    <p>
-                                        Manages IEDC activities, guiding teams and promoting an innovation-focused culture.</p>
-                                    <div class="social">
-                                        <a
-                                            href="#"><i
-                                                class="ri-instagram-fill"></i></a>
-                                            <a
-                                                href="#">
-                                                    <i class="ri-linkedin-box-fill"></i> </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="200">
-                            <div class="member d-flex align-items-start">
-                                <div class="pic">
-                                    <img src="assets/img/execom/2526/lakshmi-ratheesan.jpeg" class="img-fluid" alt="" />
-                                </div>
-                                <div class="member-info">
-                                    <h4>Lakshmi Ratheesan</h4>
-                                    <span>Women Innovation Lead</span>
-                                    <p>
-                                        Advocates women-led innovation, building an inclusive and empowering startup ecosystem.</p>
-                                    <div class="social">
-                                        <a
-                                            href="#"><i
-                                                class="ri-instagram-fill"></i></a>
-                                            <a
-                                                href="#">
-                                                    <i class="ri-linkedin-box-fill"></i> </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="200">
-                            <div class="member d-flex align-items-start">
-                                <div class="pic">
-                                    <img src="assets/img/execom/2526/amina-sidhyc.jpeg" class="img-fluid" alt="" />
-                                </div>
-                                <div class="member-info">
-                                    <h4>Amina Sidhyc</h4>
-                                    <span>Quality & Operations Lead</span>
-                                    <p>
-                                        Oversees operations and quality, ensuring efficient workflows and adherence to standards.
-                                    </p>
-                                    <div class="social">
-                                        <a
-                                            href="#"><i
-                                                class="ri-instagram-fill"></i></a>
-                                            <a
-                                                href="#">
-                                                    <i class="ri-linkedin-box-fill"></i> </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="300">
-                            <div class="member d-flex align-items-start">
-                                <div class="pic">
-                                    <img src="assets/img/execom/2526/shanima-shaji.jpeg" class="img-fluid" alt="" />
-                                </div>
-
-                                <div class="member-info mt-3 mt-lg-0">
-                                    <h4>Shanima Shaji</h4>
-                                    <span>Finance Lead</span>
-                                    <p>
-                                        Handles financial planning, ensuring optimal resource use and budget alignment.
-                                    </p>
-                                    <div class="social">
-                                        <a href="#"><i
-                                            class="ri-instagram-fill"></i></a>
-                                        <a
-                                            href="#">
-                                                <i class="ri-linkedin-box-fill"></i> </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
-                            <div class="member d-flex align-items-start">
-                                <div class="pic">
-                                    <img src="assets/img/execom/2526/niz-maria-roy.jpeg" class="img-fluid" alt="" />
-                                </div>
-                                <div class="member-info">
-                                    <h4>Niz Maria Roy</h4>
-                                    <span>Branding & Marketing Lead</span>
-                                    <p>
-                                        Drives branding and outreach, managing campaigns to boost visibility and engagement.
-                                    </p>
-                                    <div class="social">
-                                        <a href="#"><i
-                                            class="ri-instagram-fill"></i></a>
-                                        <a
-                                            href="#">
-                                                <i class="ri-linkedin-box-fill"></i> </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
-                            <div class="member d-flex align-items-start">
-                                <div class="pic">
-                                    <img src="assets/img/execom/2526/adithyan-b.jpeg" class="img-fluid" alt="" />
-                                </div>
-                                <div class="member-info">
-                                    <h4>Adithyan B</h4>
-                                    <span>Community Lead</span>
-                                    <p>
-                                        Builds community engagement, leading collaborative initiatives.
-                                    </p>
-                                    <div class="social">
-                                        <a href="#"><i
-                                            class="ri-instagram-fill"></i></a>
-                                        <a href="#"> <i class="ri-linkedin-box-fill"></i> </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
-                            <div class="member d-flex align-items-start">
-                                <div class="pic">
-                                    <img src="assets/img/execom/2526/ashin-k-suresh.jpeg" class="img-fluid" alt="" />
-                                </div>
-                                <div class="member-info">
-                                    <h4>Ashin K Suresh</h4>
-                                    <span>Creative & Innovation Lead</span>
-                                    <p>
-                                        Leads creative strategy, producing visual content to support marketing and engagement.</p>
-                                    <div class="social">
-                                        <a
-                                            href="#"><i
-                                                class="ri-instagram-fill"></i></a>
-                                            <a href="#"> <i class="ri-linkedin-box-fill"></i> </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 4 column done -->
-                        <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
-                            <div class="member d-flex align-items-start">
-                                <div class="pic">
-                                    <img src="assets/img/execom/2526/richu-v-prakash.jpeg" class="img-fluid" alt="" />
-                                </div>
-                                <div class="member-info">
-                                    <h4>Richu V Prakash</h4>
-                                    <span>Technical Lead</span>
-                                    <p>
-                                        Directs tech development and execution, guiding engineering initiatives and solutions.
-                                    </p>
-                                    <div class="social">
-                                        <a
-                                            href="#"><i
-                                                class="ri-instagram-fill"></i></a>
-                                            <a href="#"> <i
-                                                class="ri-linkedin-box-fill"></i> </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
-                            <div class="member d-flex align-items-start">
-                                <div class="pic">
-                                    <img src="assets/img/execom/2526/sarang-krishna-r.jpeg" class="img-fluid" alt="" />
-                                </div>
-                                <div class="member-info">
-                                    <h4>Sarang Krishna R</h4>
-                                    <span>IPR & Research Lead</span>
-                                    <p>
-                                        Leads innovation research and IP management, streamlining documentation and commercialization.
-                                    </p>
-                                    <div class="social">
-                                        <!-- <a href=""><i class="ri-twitter-fill"></i></a>
-                                        <a href=""><i class="ri-facebook-fill"></i></a> -->
-                                        <a
-                                            href="#"><i
-                                                class="ri-instagram-fill"></i></a>
-                                            <a href="#"> <i class="ri-linkedin-box-fill"></i> </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <p class="execom-subtitle text-center">Leadership team built on execution, quality, and innovation.</p>
+                        <div id="execom-cards" class="execom-grid" aria-live="polite"></div>
                     </div>
                 </div>
             </section>
@@ -506,7 +306,7 @@
                                 <div class="icon-box">
                                     <div class="icon"><i class="bi bi-printer"></i></div>
                                     <h4><a href="./pages/3d-printing.html">3D Printing</a></h4>
-                                    <p style="color: black;">
+                                    <p class="service-copy">
                                         Revolutionize your manufacturing process with our cutting-edge
                                         3D printing services. Our experienced team can help bring your
                                         designs to life in ways you never thought possible.
@@ -526,8 +326,8 @@
                                 onclick="window.location.href = './pages/3d-printing.html';">
                                     <div class="icon-box">
                                         <div class="icon"><i class="bi bi-badge-3d"></i></div>
-                                        <h4><a href="">3D Modelling</a></h4>
-                                        <p style="color: black;"">
+                                        <h4><a href="./pages/3d-printing.html">3D Modelling</a></h4>
+                                        <p class="service-copy">
                                             Get ready to dive into the world of innovation and an enhanced
                                             project experience with the 3D modelling services provided by
                                             IEDC@SAINTGITS.
@@ -535,7 +335,7 @@
                                         <br>
                                         <br>
                                         <br>
-                                        <button class=" learn-more">
+                                        <button class="learn-more">
                                             <span class="circle" aria-hidden="true">
                                                 <span class="icon arrow"></span>
                                             </span>
@@ -781,8 +581,8 @@
 
                             <li data-aos="fade-up" class="startup-item" data-aos-delay="200">
                                 <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed collapse-head">
-                                    <span>03</span> DOTPEEDIKA TECHLABS LLP</a>
-                                <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                                    <span>03</span> DOTPEEDIKA TECHLABS LLP
+                                    <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                                 <div id="faq-list-3" class="collapse p-3" data-bs-parent=".faq-list">
                                     Founders:
                                     <h5>
@@ -806,12 +606,12 @@
 
 
                             <li data-aos="fade-up" class="startup-item" data-aos-delay="100">
-                                <a data-bs-toggle="collapse" class="collapse collapse-head" data-bs-target="#faq-list-4">
+                                <a data-bs-toggle="collapse" class="collapsed collapse-head" data-bs-target="#faq-list-4">
                                     <span>04</span> MEGASOLUTIONS
                                     <i class="bx bx-chevron-down icon-show"></i>
                                     <i class="bx bx-chevron-up icon-close"></i>
                                 </a>
-                                <div id="faq-list-4" class="collapse show p-3" data-bs-parent=".faq-list">
+                                <div id="faq-list-4" class="collapse p-3" data-bs-parent=".faq-list">
                                     Cofounders:
                                     <h5>
                                         Er. Jyothish Chandran G
@@ -965,7 +765,7 @@
                                     <i class="bi bi-geo-alt"></i>
                                     <h4>Location:</h4>
 
-                                    <p><a href="https://maps.app.goo.gl/2da8oW512hKBK9FQ6" style="color:#6182ba">
+                                    <p><a href="https://maps.app.goo.gl/2da8oW512hKBK9FQ6" class="contact-link">
                                         Saintgits College of Engineering <br />
                                         Kottukulam Hills, Pathamuttom, Kottayam, Kerala<br /></a>
                                     </p>
@@ -974,25 +774,25 @@
                                 <div class="email">
                                     <i class="bi bi-envelope"></i>
                                     <h4>Email:</h4>
-                                    <p><a href="mailto:iedc@saintgits.org" style="color:#6182ba">iedc@saintgits.org</a></p>
+                                    <p><a href="mailto:iedc@saintgits.org" class="contact-link">iedc@saintgits.org</a></p>
                                 </div>
 
                                 <div class="phone">
                                     <i class="bi bi-phone"></i>
                                     <h4>Call:</h4>
-                                    <p><a href="tel:+914812430349" style="color:#6182ba">+91 481 2430349</a></p>
+                                    <p><a href="tel:+914812430349" class="contact-link">+91 481 2430349</a></p>
                                 </div>
 
                                 <!-- <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15197.163777806864!2d76.5513848057459!3d9.51021178954157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
                                 src="https://maps.google.com/maps?q=Kottukulam%20Hills,%20Pathamuttam%20P.%20O,%20Kerala%20686532&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
                                 frameborder="0"
-                                style="border: 0; width: 100%; height: 290px"
+                                class="contact-map"
                                 allowfullscreen
                                 ></iframe> -->
                                 <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3934.985260128457!2d76.54917071399433!3d9.510009593188125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b062ed484f475a7%3A0xea66b5d0e55062ca!2sSaintgits%20College%20of%20Engineering%20(Autonomous)%2C%20Kottayam%2C%20Kerala!5e0!3m2!1sen!2sin!4v1676740179090!5m2!1sen!2sin"
-                                    frameborder="0" style="border: 0; width: 100%; height: 290px" allowfullscreen></iframe>
+                                    frameborder="0" class="contact-map" allowfullscreen></iframe>
                             </div>
                         </div>
 
@@ -1043,10 +843,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-3 col-md-6 footer-contact">
-                            <h3 style="
-                                font-family: 'Trebuchet MS', 'Lucida Sans Unicode',
-                                'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-                                ">IEDC@SAINTGITS</h3>
+                            <h3 class="footer-brand-title">IEDC@SAINTGITS</h3>
                             <p>
                                 Saintgits College of Engineering <br />
                                 Kottukulam Hills, Pathamuttom<br />
@@ -1119,7 +916,7 @@
                             <br>
                                 <!-- <div class="social-links mt-3">
                                 <h4>Our partners</h4>
-                                <li><b style="color:#7e3751;">TinkerHub Saintgits</b></li> -->
+                                <li><b class="partner-name">TinkerHub Saintgits</b></li> -->
                         </div>
                     </div>
                 </div>
@@ -1149,6 +946,8 @@
         <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
         <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
         <script src="assets/vendor/php-email-form/validate.js"></script>
+
+        <script src="assets/js/execom.js"></script>
 
         <!-- Template Main JS File -->
         <script src="assets/js/main.js"></script>

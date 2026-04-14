@@ -1,3 +1,5 @@
+@import url("./tokens.css");
+
 /* .container2 {
     padding-right: calc(var(1.5rem) * .5);
     padding-left: calc(var(--bs-gutter-x) * .5);
@@ -143,25 +145,25 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50px;
+  border-radius: var(--radius-pill);
   width: 32px;
   height: 32px;
-  background: #eff2f8;
+  background: var(--color-soft-surface);
   text-decoration: none;
 }
 
 .social a i {
-  color: #7e3751;
+  color: var(--color-heading);
   font-size: 16px;
   margin: 0 2px;
 }
 
 .social a:hover {
-  background: #a81b30;
+  background: var(--color-primary);
 }
 
 .social a:hover i {
-  color: #fff;
+  color: var(--color-white);
 }
 
 .social a + a {
@@ -180,10 +182,10 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50px;
+  border-radius: var(--radius-pill);
   width: 36px;
   height: 36px;
-  border: 1px solid white;
+  border: 1px solid var(--color-white);
   background: 0;
   text-decoration: none;
 }
