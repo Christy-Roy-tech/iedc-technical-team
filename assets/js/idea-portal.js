@@ -8,6 +8,31 @@
   const timestampInput = document.getElementById("dateandtime");
   const submitButton = document.getElementById("submit");
   const phoneInput = document.getElementById("phno");
+  const LAYER_LINE_HEIGHT_DESKTOP = 74;
+  const LAYER_LINE_HEIGHT_MOBILE = 44;
+  const LAYER_OFFSET_DESKTOP = 44;
+  const LAYER_OFFSET_MOBILE = 24;
+  const layerWords = [
+    "BIG IDEA",
+    "INNOVATION",
+    "PROTOTYPE",
+    "VALIDATION",
+    "VENTURE",
+    "GROWTH",
+    "IMPACT",
+    "FOUNDERS",
+    "FUTURE",
+  ];
+  const layerLines = [
+    { top: "\u00A0", bottom: layerWords[0] },
+    ...layerWords.slice(0, -1).map((word, index) => ({
+      top: word,
+      bottom: layerWords[index + 1],
+    })),
+    { top: layerWords[layerWords.length - 1], bottom: "\u00A0" },
+  ];
+
+  let flowTimeline = null;
 
   function getFormattedTimestamp() {
     const now = new Date();
@@ -41,58 +66,81 @@
     phoneInput.value = onlyDigits;
   }
 
+  function isSmallScreen() {
+    return window.innerWidth < 768;
+  }
+
+  function getLayerLineHeight() {
+    return isSmallScreen() ? LAYER_LINE_HEIGHT_MOBILE : LAYER_LINE_HEIGHT_DESKTOP;
+  }
+
+  function getLayerOffset() {
+    return isSmallScreen() ? LAYER_OFFSET_MOBILE : LAYER_OFFSET_DESKTOP;
+  }
+
   function buildLayeredText() {
     if (!layeredList) {
       return;
     }
 
-    const isSmallScreen = window.innerWidth < 768;
+    const lineHeight = getLayerLineHeight();
+    const offset = getLayerOffset();
+    const centerIndex = Math.floor(layerLines.length / 2);
 
-    const lines = [
-      "BIG IDEA SUBMISSION",
-      "IDEATE . PROTOTYPE . SCALE",
-      "SAINTGITS IEDC",
-      "TURN CONCEPTS INTO VENTURES",
-      "BIG IDEA SUBMISSION",
-      "SAINTGITS IEDC",
-    ];
+    layeredList.innerHTML = "";
 
-    if (!layeredList.children.length) {
-      layeredList.innerHTML = lines
-        .map((text, index) => {
-          const directionClass = index % 2 === 0 ? "odd" : "even";
-          return `
-            <li class="layered-line ${directionClass}">
-              <p>${text}</p>
-            </li>
-          `;
-        })
-        .join("");
-    }
+    layerLines.forEach((line, index) => {
+      const tx = (index - centerIndex) * offset;
+      const skew = index % 2 === 0 ? "58deg,-30deg" : "0deg,-30deg";
+      const scaleY = index % 2 === 0 ? 0.67 : 1.33;
 
-    const lineElements = layeredList.querySelectorAll(".layered-line p");
-    const total = lineElements.length || 1;
+      const li = document.createElement("li");
+      li.className = `layered-line ${index % 2 === 0 ? "even" : "odd"}`;
+      li.style.cssText = `height:${lineHeight}px; transform:translateX(${tx}px) skew(${skew}) scaleY(${scaleY});`;
 
-    lineElements.forEach((line, index) => {
-      const scale = 1.02 - (index / total) * 0.18;
-      const opacity = 0.88 - (index / total) * 0.5;
-      const vwSize = (isSmallScreen ? 7.3 : 4.4) - index * (isSmallScreen ? 0.56 : 0.34);
-      const remCap = (isSmallScreen ? 2.2 : 3.4) - index * (isSmallScreen ? 0.14 : 0.2);
+      [line.top, line.bottom].forEach((text) => {
+        const p = document.createElement("p");
+        p.textContent = text;
+        p.style.cssText = `height:${lineHeight}px; line-height:${lineHeight - 5}px;`;
+        li.appendChild(p);
+      });
 
-      line.style.fontSize = `clamp(${isSmallScreen ? "0.95rem" : "1.05rem"}, ${Math.max(vwSize, 1.45).toFixed(2)}vw, ${Math.max(remCap, 1.45).toFixed(2)}rem)`;
-      line.style.transform = `scale(${Math.max(scale, 0.8).toFixed(3)})`;
-      line.style.opacity = `${Math.max(opacity, 0.28).toFixed(2)}`;
+      layeredList.appendChild(li);
     });
   }
 
-  function animateLayeredText() {
-    if (!layeredText || !window.gsap) {
+  function buildLayeredTextTimeline() {
+    if (!layeredList || !window.gsap) {
+      return;
+    }
+
+    const allLines = layeredList.querySelectorAll("p");
+    if (!allLines.length) {
+      return;
+    }
+
+    if (flowTimeline) {
+      flowTimeline.kill();
+      flowTimeline = null;
+    }
+
+    gsap.set(allLines, { y: 0 });
+
+    flowTimeline = gsap.timeline({ repeat: -1, yoyo: true });
+    flowTimeline.to(allLines, {
+      y: -getLayerLineHeight(),
+      duration: 1.05,
+      ease: "power2.inOut",
+      stagger: 0.07,
+    });
+  }
+
+  function animatePortalEntry() {
+    if (!window.gsap) {
       return;
     }
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const hoverCapable = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    const lines = layeredText.querySelectorAll(".layered-line p");
 
     gsap.from(".portal-hero .eyebrow, .portal-hero h1, .portal-hero .hero-copy", {
       y: 24,
@@ -102,7 +150,7 @@
       ease: "power3.out",
     });
 
-    gsap.from(lines, {
+    gsap.from(".layered-line", {
       y: 18,
       opacity: 0,
       duration: 0.72,
@@ -132,55 +180,37 @@
       return;
     }
 
-    lines.forEach((line, index) => {
-      gsap.to(line, {
-        x: index % 2 === 0 ? -8 : 8,
-        duration: 6 + index * 0.2,
-        repeat: -1,
+    gsap.to(".layered-line", {
+      y: -2,
+      duration: 2.4,
+      ease: "sine.inOut",
+      stagger: {
+        each: 0.04,
+        from: "center",
         yoyo: true,
-        ease: "sine.inOut",
-      });
-    });
-
-    if (!hoverCapable) {
-      return;
-    }
-
-    layeredText.addEventListener("pointermove", (event) => {
-      const bounds = layeredText.getBoundingClientRect();
-      const midpoint = bounds.left + bounds.width / 2;
-      const diff = (event.clientX - midpoint) / bounds.width;
-      const tilt = Math.max(Math.min(diff * 18, 8), -8);
-
-      lines.forEach((line, index) => {
-        const dir = index % 2 === 0 ? -1 : 1;
-        gsap.to(line, {
-          x: dir * tilt,
-          duration: 0.45,
-          overwrite: true,
-          ease: "power2.out",
-        });
-      });
-    });
-
-    layeredText.addEventListener("pointerleave", () => {
-      lines.forEach((line) => {
-        gsap.to(line, {
-          x: 0,
-          duration: 0.55,
-          overwrite: true,
-          ease: "power2.out",
-        });
-      });
+        repeat: -1,
+      },
     });
   }
 
-  buildLayeredText();
-  animateLayeredText();
+  function refreshLayeredText() {
+    buildLayeredText();
+    buildLayeredTextTimeline();
+  }
+
+  refreshLayeredText();
+  animatePortalEntry();
   updateTimestamp();
 
+  let resizeTimer = null;
   window.addEventListener("resize", () => {
-    buildLayeredText();
+    if (resizeTimer) {
+      window.clearTimeout(resizeTimer);
+    }
+
+    resizeTimer = window.setTimeout(() => {
+      refreshLayeredText();
+    }, 120);
   });
 
   document.addEventListener("visibilitychange", () => {
