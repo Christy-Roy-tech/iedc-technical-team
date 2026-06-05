@@ -220,6 +220,20 @@ const createPortfolioItem = (item) => {
   return wrapper;
 };
 
+const waitForImages = (container) => {
+  const images = container.querySelectorAll("img");
+  const promises = Array.from(images).map((img) => {
+    if (img.complete && img.naturalHeight > 0) {
+      return Promise.resolve();
+    }
+    return new Promise((resolve) => {
+      img.addEventListener("load", resolve, { once: true });
+      img.addEventListener("error", resolve, { once: true });
+    });
+  });
+  return Promise.all(promises);
+};
+
 const refreshPortfolioLayout = () => {
   if (!portfolioContainer || !window.Isotope) {
     if (window.GLightbox) {
@@ -228,24 +242,36 @@ const refreshPortfolioLayout = () => {
     return;
   }
 
-  const instance = window.Isotope.data
-    ? window.Isotope.data(portfolioContainer)
-    : null;
-
-  if (instance) {
-    instance.reloadItems();
-    instance.arrange();
-  } else {
-    new Isotope(portfolioContainer, { itemSelector: ".portfolio-item" });
+  // Get existing Isotope instance (created by main.js on page load)
+  let instance = null;
+  try {
+    instance = window.Isotope.data(portfolioContainer);
+  } catch (_) {
+    instance = null;
   }
 
-  if (window.AOS) {
-    AOS.refresh();
-  }
+  const doLayout = () => {
+    if (instance) {
+      instance.reloadItems();
+      instance.layout();
+    } else {
+      instance = new Isotope(portfolioContainer, {
+        itemSelector: ".portfolio-item",
+        layoutMode: "masonry",
+      });
+    }
 
-  if (window.GLightbox) {
-    GLightbox({ selector: ".portfolio-lightbox" });
-  }
+    if (window.AOS) {
+      AOS.refresh();
+    }
+
+    if (window.GLightbox) {
+      GLightbox({ selector: ".portfolio-lightbox" });
+    }
+  };
+
+  // Wait for all images to load so Isotope measures correct heights
+  waitForImages(portfolioContainer).then(doLayout);
 };
 
 const fetchGalleryItems = async () => {
