@@ -113,8 +113,8 @@ login[_0x14238e(0x15b)]("click", (_0x41f9aa) => {
         const _0x26c3d7 = _0x2ad109;
         setTimeout(function () {
           const _0xe239ec = _0x264c;
-          _0x359af0 == "webmasteriedc@gmail.com"
-            ? (location[_0xe239ec(0x152)] = _0xe239ec(0x142))
+          _0x359af0 == "iedcsaintgits@gmail.com"
+            ? (location[_0xe239ec(0x152)] = "../index.html#admin-portal")
             : (location["href"] = "./user/user-dashboard.html");
         }, 0x7d0);
         const _0x24973d = Swal["mixin"]({

@@ -40,12 +40,7 @@
         <header id="header" class="fixed-top">
             <div class="container nav-shell d-flex align-items-center">
                 <a href="index.html" class="logo nav-brand" aria-label="IEDC Home">
-                    <span class="logo-dots" aria-hidden="true">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </span>
+                    <img src="assets/img/Icons/favicon.ico" class="nav-icon" alt="IEDC icon" />
                     <span class="brand-text">IEDC</span>
                 </a>
 
@@ -89,6 +84,11 @@
                         <li>
                             <a class="nav-link scrollto nav-hover-link" href="#faq">
                                 <span class="nav-text-stack"><span>Startups</span><span>Startups</span></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link scrollto nav-hover-link" href="#admin-portal">
+                                <span class="nav-text-stack"><span>Admin</span><span>Admin</span></span>
                             </a>
                         </li>
                         <li>
@@ -513,6 +513,148 @@
                 </div>
             </section>
             <!-- End Events Section -->
+
+            <!-- ======= Admin Portal Section ======= -->
+            <section id="admin-portal" class="admin-portal section-bg">
+                <div class="container" data-aos="fade-up">
+                    <div class="section-title">
+                        <h2>Admin Portal</h2>
+                        <p>Manage the gallery and events using the admin account.</p>
+                    </div>
+
+                    <div id="admin-login-card" class="admin-card admin-login-card">
+                        <div class="admin-login-header">
+                            <img src="assets/img/Icons/favicon.ico" alt="IEDC" class="admin-login-logo" />
+                            <div>
+                                <h3>Admin Access</h3>
+                                <p>Sign in to manage gallery &amp; events</p>
+                            </div>
+                        </div>
+                        <form id="admin-login-form" class="admin-login-form">
+                            <div class="admin-field">
+                                <label for="admin-email">Email</label>
+                                <input id="admin-email" type="email" placeholder="admin@example.com" required autocomplete="email" />
+                            </div>
+                            <div class="admin-field">
+                                <label for="admin-password">Password</label>
+                                <div class="admin-password-wrapper">
+                                    <input id="admin-password" type="password" placeholder="Enter password" required autocomplete="current-password" />
+                                    <button type="button" id="admin-toggle-password" class="admin-password-toggle" aria-label="Toggle password visibility">
+                                        <i class="bi bi-eye-slash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button class="admin-btn admin-login-submit" type="submit">
+                                <span class="admin-login-btn-text">Sign In</span>
+                                <span class="admin-login-spinner" hidden></span>
+                            </button>
+                            <p id="admin-login-status" class="admin-status"></p>
+                        </form>
+                        <div id="admin-logged-in-bar" class="admin-logged-in-bar" hidden>
+                            <div class="admin-logged-in-info">
+                                <i class="bi bi-shield-check"></i>
+                                <p id="admin-logged-in-email" class="admin-status is-success"></p>
+                            </div>
+                            <button id="admin-signout" class="admin-btn admin-btn-ghost" type="button">Sign Out</button>
+                        </div>
+                    </div>
+
+                    <div id="admin-tools" class="admin-tools" hidden>
+                        <div class="admin-grid">
+                            <div class="admin-card">
+                                <h3>Gallery Manager</h3>
+                                <form id="admin-gallery-form" class="admin-form">
+                                    <div class="admin-field">
+                                        <label for="admin-gallery-file">Image</label>
+                                        <input id="admin-gallery-file" type="file" accept="image/*" required />
+                                    </div>
+                                    <div id="admin-gallery-preview" class="admin-gallery-preview" aria-hidden="true"></div>
+                                    <div class="admin-field">
+                                        <label for="admin-gallery-title">Title</label>
+                                        <input id="admin-gallery-title" type="text" placeholder="Workshop snapshot" />
+                                    </div>
+                                    <div class="admin-field">
+                                        <label for="admin-gallery-caption">Caption</label>
+                                        <textarea id="admin-gallery-caption" rows="3" placeholder="Short caption for the gallery card"></textarea>
+                                    </div>
+                                    <button class="admin-btn" type="submit">Upload to Gallery</button>
+                                    <p id="admin-gallery-status" class="admin-status"></p>
+                                </form>
+                                <div class="admin-gallery-list" id="admin-gallery-list"></div>
+                            </div>
+
+                            <div class="admin-card">
+                                <h3>Event Manager</h3>
+                                <div class="admin-field">
+                                    <label for="admin-event-select">Select event to edit</label>
+                                    <div class="admin-select-row">
+                                        <select id="admin-event-select">
+                                            <option value="">Create new event</option>
+                                        </select>
+                                        <button id="admin-event-new" class="admin-btn admin-btn-ghost" type="button">New</button>
+                                    </div>
+                                </div>
+                                <form id="admin-event-form" class="admin-form">
+                                    <div class="admin-field">
+                                        <label for="admin-event-name">Event name</label>
+                                        <input id="admin-event-name" type="text" required placeholder="Innovators Summit" />
+                                    </div>
+                                    <div class="admin-field-group">
+                                        <div class="admin-field">
+                                            <label for="admin-event-start-date">Start date</label>
+                                            <input id="admin-event-start-date" type="text" placeholder="12 Oct 2026" />
+                                        </div>
+                                        <div class="admin-field">
+                                            <label for="admin-event-start-time">Time from</label>
+                                            <input id="admin-event-start-time" type="text" placeholder="9:00 AM" />
+                                        </div>
+                                    </div>
+                                    <div class="admin-field-group">
+                                        <div class="admin-field">
+                                            <label for="admin-event-end-date">End date</label>
+                                            <input id="admin-event-end-date" type="text" placeholder="12 Oct 2026" />
+                                        </div>
+                                        <div class="admin-field">
+                                            <label for="admin-event-end-time">Time to</label>
+                                            <input id="admin-event-end-time" type="text" placeholder="4:00 PM" />
+                                        </div>
+                                    </div>
+                                    <div class="admin-field">
+                                        <label for="admin-event-location">Location</label>
+                                        <input id="admin-event-location" type="text" placeholder="SCIE Lab" />
+                                    </div>
+                                    <div class="admin-field">
+                                        <label for="admin-event-link">Registration link</label>
+                                        <input id="admin-event-link" type="url" placeholder="https://forms.gle/" />
+                                    </div>
+                                    <div class="admin-field">
+                                        <label for="admin-event-last-date">Register before</label>
+                                        <input id="admin-event-last-date" type="text" placeholder="10 Oct, 11:59 PM" />
+                                    </div>
+                                    <div class="admin-field">
+                                        <label for="admin-event-req">Requirements</label>
+                                        <textarea id="admin-event-req" rows="3" placeholder="Laptop, basic HTML"></textarea>
+                                    </div>
+                                    <div class="admin-field">
+                                        <label for="admin-event-flag">Status</label>
+                                        <select id="admin-event-flag">
+                                            <option value="active">Active (show on home)</option>
+                                            <option value="false">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="admin-action-row">
+                                        <button class="admin-btn" type="submit">Save event</button>
+                                        <button id="admin-event-delete" class="admin-btn admin-btn-danger" type="button" disabled>Delete event</button>
+                                    </div>
+                                    <p id="admin-event-feedback" class="admin-status"></p>
+                                </form>
+                                <div class="admin-event-list" id="admin-event-list"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Admin Portal Section -->
 
             <!-- ======= Startups Section ======= -->
             <section id="faq" class="faq section-bg">
@@ -950,6 +1092,7 @@
         <!-- Template Main JS File -->
         <script src="assets/js/main.js"></script>
         <script type="module" src="./assets/js/index.js"></script>
+        <script type="module" src="./assets/js/admin_portal.js"></script>
     </body>
 
 </html>

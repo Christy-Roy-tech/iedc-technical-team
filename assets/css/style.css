@@ -163,6 +163,14 @@ p {
   display: block;
 }
 
+#header .logo.nav-brand .nav-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  object-fit: contain;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
 #header .brand-text {
   color: var(--color-white);
   font-size: 0.85rem;
@@ -595,79 +603,81 @@ p {
 }
 
 /*--------------------------------------------------------------
-# Intro-Section - IEDC BACKGROUND
+# Hero Section — Mobile-first, optimised across all devices
 ---------------------------------------------------------------*/
-/* PC  */
-@media (min-width: 980px) {
-  #hero .hero-mobile {
-    display: none;
-  }
 
-  #hero {
-    width: 100%;
-    height: 100vh;
-    background-position: center;
-    background-size: cover;
-    background-image: url("../hero.png");
-  }
-
-  .hero-desktop img {
-    height: 95vh;
-    width: auto;
-  }
+/* ── Base (Mobile-first — portrait image) ──────────────────── */
+#hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  padding: 0;
+  background-image: url("../mobile-view.png");
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-/*mobile*/
-@media (max-width: 979.9px) {
-  #hero {
-    width: 100%;
-    height: 100vh;
-    background-image: url("../hero.png");
-    background-position: center;
-    background-size: cover;
-  }
-
-  #hero .hero-desktop {
-    display: none;
-  }
+/* Animated gradient divider at the bottom */
+#hero::after {
+  content: "";
+  position: absolute;
+  left: clamp(16px, 6vw, 72px);
+  right: clamp(16px, 6vw, 72px);
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 120, 120, 0.95),
+    rgba(255, 210, 102, 0.95),
+    rgba(102, 227, 255, 0.95),
+    rgba(255, 255, 255, 0)
+  );
+  background-size: 200% 100%;
+  animation: hero-divider-glow 3.2s linear infinite;
+  opacity: 0.9;
+  pointer-events: none;
 }
 
 #hero .container {
   padding-top: 72px;
 }
 
+/* ── Typography (base — smallest screens) ──────────────────── */
 #hero h1 {
-  font-family: Poppins;
+  font-family: Poppins, sans-serif;
   margin: 0 0 10px 0;
-  font-size: 48px;
+  font-size: 26px;
   font-weight: 700;
-  line-height: 56px;
+  line-height: 1.2;
   color: #ffffff;
 }
 
 #hero h2 {
   color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 50px;
-  font-size: 24px;
+  margin-bottom: 24px;
+  font-size: 16px;
+  line-height: 1.4;
 }
 
+/* ── Buttons ───────────────────────────────────────────────── */
 #hero .btn-get-started {
   font-family: "Jost", sans-serif;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 15px;
   letter-spacing: 1px;
   display: inline-block;
-  padding: 10px 28px 11px 28px;
+  padding: 10px 24px 11px;
   border-radius: 50px;
   transition: 0.5s;
   margin: 10px 0 0 0;
   color: #fff;
-  /* background: #a81b29; */
   background: #c70000da;
 }
 
 #hero .btn-get-started:hover {
-  /* background: #209dd8; */
   background: #590900;
 }
 
@@ -693,6 +703,7 @@ p {
   color: #e30000;
 }
 
+/* ── Animation ─────────────────────────────────────────────── */
 #hero .animated {
   animation: up-down 2s ease-in-out infinite alternate-reverse both;
 }
@@ -701,9 +712,86 @@ p {
   width: 55%;
 }
 
+/* ── Device: small phones (up to ~480px) ───────────────────── */
+/* Base styles above already handle this. Portrait mobile-view image
+   is naturally suited for narrow screens. */
+
+/* ── Device: larger phones / small tablets (481–767px) ─────── */
+@media (min-width: 481px) {
+  #hero h1 {
+    font-size: 32px;
+  }
+
+  #hero h2 {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+}
+
+/* ── Device: tablets (768–979px) ───────────────────────────── */
+@media (min-width: 768px) {
+  #hero h1 {
+    font-size: 40px;
+    line-height: 1.2;
+  }
+
+  #hero h2 {
+    font-size: 22px;
+    margin-bottom: 40px;
+  }
+
+  #hero .btn-get-started {
+    font-size: 16px;
+    padding: 10px 28px 11px;
+  }
+}
+
+/* ── Device: tablets in landscape / narrow desktops ────────── */
+@media (min-width: 768px) and (max-width: 979px) {
+  #hero {
+    /* Still use mobile image but position it better for landscape */
+    background-position: center center;
+  }
+}
+
+/* ── Device: desktop (≥980px) — switch to landscape hero ───── */
+@media (min-width: 980px) {
+  #hero {
+    background-image: url("../hero.png");
+    background-position: center;
+    background-size: cover;
+  }
+
+  #hero h1 {
+    font-size: 48px;
+    line-height: 56px;
+  }
+
+  #hero h2 {
+    font-size: 24px;
+    margin-bottom: 50px;
+  }
+
+  #hero .hero-mobile {
+    display: none;
+  }
+}
+
+/* ── Device: large desktop (≥1400px) ──────────────────────── */
+@media (min-width: 1400px) {
+  #hero {
+    background-position: center;
+  }
+
+  #hero h1 {
+    font-size: 56px;
+    line-height: 64px;
+  }
+}
+
+/* ── Mobile layout adjustments ─────────────────────────────── */
 @media (max-width: 991px) {
   #hero {
-    height: 100vh;
     text-align: center;
   }
 
@@ -718,22 +806,9 @@ p {
   #hero .hero-img img {
     width: 50%;
   }
-}
 
-@media (max-width: 768px) {
-  #hero h1 {
-    font-size: 28px;
-    line-height: 36px;
-  }
-
-  #hero h2 {
-    font-size: 18px;
-    line-height: 24px;
-    margin-bottom: 30px;
-  }
-
-  #hero .hero-img img {
-    width: 60%;
+  #hero .hero-desktop {
+    display: none;
   }
 }
 
@@ -741,13 +816,9 @@ p {
   #hero .hero-img img {
     width: 70%;
   }
-
-  #hero .btn-get-started {
-    font-size: 16px;
-    padding: 10px 24px 11px 24px;
-  }
 }
 
+/* ── Keyframes ─────────────────────────────────────────────── */
 @keyframes up-down {
   0% {
     transform: translateY(10px);
@@ -755,6 +826,16 @@ p {
 
   100% {
     transform: translateY(-10px);
+  }
+}
+
+@keyframes hero-divider-glow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 200% 50%;
   }
 }
 
@@ -1953,6 +2034,448 @@ section {
 .pricing ul .na span {
   text-decoration: line-through;
 }
+
+/*--------------------------------------------------------------
+# Admin Portal
+--------------------------------------------------------------*/
+.admin-portal {
+  background: var(--color-surface);
+}
+
+.admin-portal .admin-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  padding: 1.5rem;
+}
+
+.admin-portal .admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.admin-portal .admin-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.admin-portal .admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.admin-portal .admin-field-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+
+.admin-portal input,
+.admin-portal textarea,
+.admin-portal select {
+  border-radius: 10px;
+  border: 1px solid var(--color-border-strong);
+  padding: 0.6rem 0.75rem;
+  font-size: 0.95rem;
+  font-family: var(--font-base);
+  color: var(--color-text);
+  background: var(--color-white);
+}
+
+.admin-portal input:focus,
+.admin-portal textarea:focus,
+.admin-portal select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(168, 27, 41, 0.12);
+}
+
+.admin-portal .admin-btn {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 0.6rem 1.4rem;
+  font-weight: 600;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.admin-portal .admin-btn:hover {
+  background: var(--color-primary-strong);
+  transform: translateY(-1px);
+}
+
+.admin-portal .admin-btn-ghost {
+  background: transparent;
+  color: var(--color-heading);
+  border: 1px solid var(--color-border-strong);
+}
+
+.admin-portal .admin-btn-ghost:hover {
+  background: rgba(126, 55, 81, 0.08);
+  transform: translateY(-1px);
+}
+
+.admin-portal .admin-btn-danger {
+  background: #b42318;
+}
+
+.admin-portal .admin-btn-danger:hover {
+  background: #8a1d14;
+}
+
+.admin-portal .admin-action-row,
+.admin-portal .admin-select-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.admin-portal .admin-login-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 1.5rem;
+}
+
+.admin-portal .admin-login-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.admin-portal .admin-status {
+  font-size: 0.9rem;
+  color: var(--color-muted-text);
+  margin-top: 0.35rem;
+}
+
+.admin-portal .admin-status.is-error {
+  color: var(--color-error);
+}
+
+.admin-portal .admin-status.is-success {
+  color: var(--color-success);
+}
+
+.admin-portal .admin-gallery-preview {
+  min-height: 120px;
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--color-border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.admin-portal .admin-gallery-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.admin-portal .admin-gallery-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.2rem;
+}
+
+.admin-portal .admin-gallery-item {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  background: var(--color-white);
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-portal .admin-gallery-item img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+}
+
+.admin-portal .admin-gallery-item-body {
+  padding: 0.65rem 0.75rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.admin-portal .admin-gallery-item-title {
+  font-weight: 600;
+  color: var(--color-heading);
+  font-size: 0.92rem;
+}
+
+.admin-portal .admin-event-list {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.admin-portal .admin-event-list-item {
+  padding: 0.65rem 0.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.admin-portal .admin-event-status-pill {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: rgba(168, 27, 41, 0.12);
+  color: var(--color-primary);
+}
+
+.admin-portal .admin-event-status-pill.inactive {
+  background: rgba(109, 109, 111, 0.15);
+  color: var(--color-muted-text);
+}
+
+/* ── Inline Admin Login ──────────────────────────────────── */
+
+.admin-portal .admin-login-card {
+  flex-direction: column;
+  max-width: 520px;
+  margin: 0 auto 1.5rem;
+}
+
+.admin-portal .admin-login-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.admin-portal .admin-login-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--color-heading);
+}
+
+.admin-portal .admin-login-header p {
+  margin: 0.15rem 0 0;
+  font-size: 0.9rem;
+  color: var(--color-muted-text);
+}
+
+.admin-portal .admin-login-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  object-fit: contain;
+  box-shadow: 0 4px 14px rgba(168, 27, 41, 0.18);
+  flex-shrink: 0;
+}
+
+.admin-portal .admin-login-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.admin-portal .admin-password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.admin-portal .admin-password-wrapper input {
+  width: 100%;
+  padding-right: 3rem;
+}
+
+.admin-portal .admin-password-toggle {
+  position: absolute;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  padding: 0.4rem;
+  cursor: pointer;
+  color: var(--color-muted-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.admin-portal .admin-password-toggle:hover {
+  color: var(--color-primary);
+}
+
+.admin-portal .admin-login-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  font-size: 1rem;
+  width: 100%;
+  position: relative;
+}
+
+.admin-portal .admin-login-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.admin-portal .admin-login-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: admin-spin 0.6s linear infinite;
+}
+
+@keyframes admin-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Logged-in bar */
+.admin-portal .admin-logged-in-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+
+.admin-portal .admin-logged-in-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-portal .admin-logged-in-info i {
+  font-size: 1.3rem;
+  color: var(--color-success, #16a34a);
+}
+
+.admin-portal .admin-logged-in-info p {
+  margin: 0;
+}
+
+/* Admin tools reveal animation */
+.admin-portal .admin-tools {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.admin-portal .admin-tools.admin-tools-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Mobile-first Admin Portal ───────────────────────────── */
+
+@media (max-width: 767px) {
+  .admin-portal .admin-login-card {
+    padding: 1.25rem;
+  }
+
+  .admin-portal .admin-login-header {
+    gap: 0.75rem;
+  }
+
+  .admin-portal .admin-login-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .admin-portal .admin-login-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .admin-portal .admin-logged-in-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .admin-portal .admin-logged-in-bar .admin-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .admin-portal .admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-portal .admin-card {
+    padding: 1.25rem;
+  }
+
+  .admin-portal input,
+  .admin-portal textarea,
+  .admin-portal select {
+    font-size: 16px; /* prevents iOS zoom */
+    min-height: 48px;
+  }
+
+  .admin-portal .admin-btn {
+    min-height: 48px;
+    font-size: 0.95rem;
+  }
+
+  .admin-portal .admin-field-group {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-portal .admin-action-row {
+    flex-direction: column;
+  }
+
+  .admin-portal .admin-action-row .admin-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .admin-portal .admin-gallery-list {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-portal .admin-select-row {
+    flex-direction: column;
+  }
+
+  .admin-portal .admin-select-row select {
+    width: 100%;
+  }
+
+  .admin-portal .admin-select-row .admin-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-portal .admin-login-header {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .admin-portal .admin-gallery-preview {
+    min-height: 100px;
+  }
+}
+
 
 /* .pricing ul li ol {
   padding: 20px 0;
