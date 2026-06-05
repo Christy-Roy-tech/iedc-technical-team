@@ -471,6 +471,10 @@ p {
     border-radius: 20px;
   }
 
+  #header .brand-text {
+    font-size: 0.75rem;
+  }
+
   .navbar {
     order: 3;
     width: 100%;
@@ -503,8 +507,9 @@ p {
 
   .navbar a,
   .navbar a:focus {
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
+    padding-left: 0.5rem;
   }
 
   .navbar .nav-hover-link {
