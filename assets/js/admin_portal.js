@@ -220,9 +220,13 @@ const createPortfolioItem = (item) => {
   return wrapper;
 };
 
-const waitForImages = (container) => {
-  const images = container.querySelectorAll("img");
-  const promises = Array.from(images).map((img) => {
+const waitForImages = (elements) => {
+  const images = [];
+  elements.forEach((el) => {
+    const imgs = el.tagName === "IMG" ? [el] : el.querySelectorAll("img");
+    images.push(...imgs);
+  });
+  const promises = images.map((img) => {
     if (img.complete && img.naturalHeight > 0) {
       return Promise.resolve();
     }
@@ -234,44 +238,20 @@ const waitForImages = (container) => {
   return Promise.all(promises);
 };
 
-const refreshPortfolioLayout = () => {
-  if (!portfolioContainer || !window.Isotope) {
-    if (window.GLightbox) {
-      GLightbox({ selector: ".portfolio-lightbox" });
-    }
-    return;
-  }
-
-  // Get existing Isotope instance (created by main.js on page load)
-  let instance = null;
+/** Get the live Isotope instance that main.js created, or null. */
+const getIsotopeInstance = () => {
+  if (!portfolioContainer || !window.Isotope) return null;
   try {
-    instance = window.Isotope.data(portfolioContainer);
+    return window.Isotope.data(portfolioContainer) || null;
   } catch (_) {
-    instance = null;
+    return null;
   }
+};
 
-  const doLayout = () => {
-    if (instance) {
-      instance.reloadItems();
-      instance.layout();
-    } else {
-      instance = new Isotope(portfolioContainer, {
-        itemSelector: ".portfolio-item",
-        layoutMode: "masonry",
-      });
-    }
-
-    if (window.AOS) {
-      AOS.refresh();
-    }
-
-    if (window.GLightbox) {
-      GLightbox({ selector: ".portfolio-lightbox" });
-    }
-  };
-
-  // Wait for all images to load so Isotope measures correct heights
-  waitForImages(portfolioContainer).then(doLayout);
+const refreshLightbox = () => {
+  if (window.GLightbox) {
+    GLightbox({ selector: ".portfolio-lightbox" });
+  }
 };
 
 const fetchGalleryItems = async () => {
@@ -291,24 +271,63 @@ const fetchGalleryItems = async () => {
 const renderPublicGallery = (items) => {
   if (!portfolioContainer) return;
 
+  const iso = getIsotopeInstance();
+
+  /* ── 1. Remove previously-added dynamic items ── */
   const existingDynamic = portfolioContainer.querySelectorAll(
     "[data-gallery-id]"
   );
-  existingDynamic.forEach((node) => node.remove());
+  if (existingDynamic.length) {
+    if (iso) {
+      iso.remove(existingDynamic);
+    } else {
+      existingDynamic.forEach((node) => node.remove());
+    }
+  }
 
   if (!items.length) {
-    refreshPortfolioLayout();
+    if (iso) iso.layout();
+    refreshLightbox();
     return;
   }
 
-  const fragment = document.createDocumentFragment();
+  /* ── 2. Create new DOM elements ── */
+  const newElements = [];
   items.forEach((item) => {
     if (!item.imageUrl) return;
-    fragment.appendChild(createPortfolioItem(item));
+    const el = createPortfolioItem(item);
+    newElements.push(el);
   });
 
+  if (!newElements.length) {
+    if (iso) iso.layout();
+    refreshLightbox();
+    return;
+  }
+
+  /* ── 3. Append to DOM ── */
+  const fragment = document.createDocumentFragment();
+  newElements.forEach((el) => fragment.appendChild(el));
   portfolioContainer.appendChild(fragment);
-  refreshPortfolioLayout();
+
+  /* ── 4. Wait for images, then tell Isotope about new items ── */
+  waitForImages(newElements).then(() => {
+    // Extra frame to let browser finish its layout pass
+    requestAnimationFrame(() => {
+      if (iso) {
+        iso.appended(newElements);
+        iso.layout();
+      } else if (window.Isotope) {
+        new Isotope(portfolioContainer, {
+          itemSelector: ".portfolio-item",
+          layoutMode: "masonry",
+        });
+      }
+
+      if (window.AOS) AOS.refresh();
+      refreshLightbox();
+    });
+  });
 };
 
 /* ── Gallery: Admin List ────────────────────────────────────── */
