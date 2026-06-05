@@ -268,9 +268,12 @@ const fetchGalleryItems = async () => {
   }
 };
 
+let renderGeneration = 0;
+
 const renderPublicGallery = (items) => {
   if (!portfolioContainer) return;
 
+  const thisGen = ++renderGeneration;
   const iso = getIsotopeInstance();
 
   /* ── 1. Remove previously-added dynamic items ── */
@@ -279,10 +282,12 @@ const renderPublicGallery = (items) => {
   );
   if (existingDynamic.length) {
     if (iso) {
-      iso.remove(existingDynamic);
-    } else {
-      existingDynamic.forEach((node) => node.remove());
+      try { iso.remove(existingDynamic); } catch (_) {}
     }
+    // Always remove from DOM as fallback (items may not be in Isotope yet)
+    existingDynamic.forEach((node) => {
+      if (node.parentNode) node.parentNode.removeChild(node);
+    });
   }
 
   if (!items.length) {
@@ -312,11 +317,13 @@ const renderPublicGallery = (items) => {
 
   /* ── 4. Wait for images, then tell Isotope about new items ── */
   waitForImages(newElements).then(() => {
-    // Extra frame to let browser finish its layout pass
+    if (thisGen !== renderGeneration) return; // a newer render superseded this one
     requestAnimationFrame(() => {
-      if (iso) {
-        iso.appended(newElements);
-        iso.layout();
+      if (thisGen !== renderGeneration) return;
+      const latestIso = getIsotopeInstance();
+      if (latestIso) {
+        latestIso.appended(newElements);
+        latestIso.layout();
       } else if (window.Isotope) {
         new Isotope(portfolioContainer, {
           itemSelector: ".portfolio-item",
@@ -669,7 +676,7 @@ const updateAdminUI = (user) => {
     setLoginLoading(false);
 
     loadEvents();
-    refreshGallery();
+    refreshGallery(); // loads both public gallery + admin list
   } else {
     // Not admin or not logged in
     if (adminLoginForm) adminLoginForm.hidden = false;
@@ -686,6 +693,11 @@ const updateAdminUI = (user) => {
       );
     }
     setLoginLoading(false);
+
+    // Load public gallery for non-admin visitors
+    if (portfolioContainer) {
+      fetchGalleryItems().then(renderPublicGallery);
+    }
   }
 };
 
@@ -698,8 +710,3 @@ if (adminSignOutButton) {
 }
 
 onAuthStateChanged(auth, updateAdminUI);
-
-/* ── Public gallery load (always runs) ──────────────────────── */
-if (portfolioContainer) {
-  fetchGalleryItems().then(renderPublicGallery);
-}
