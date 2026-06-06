@@ -70,6 +70,9 @@ const eventLinkInput = document.getElementById("admin-event-link");
 const eventLastDateInput = document.getElementById("admin-event-last-date");
 const eventRequirementsInput = document.getElementById("admin-event-req");
 const eventFlagSelect = document.getElementById("admin-event-flag");
+const eventImageInput = document.getElementById("admin-event-image");
+const eventImagePreview = document.getElementById("admin-event-image-preview");
+const eventDescInput = document.getElementById("admin-event-desc");
 const eventDeleteButton = document.getElementById("admin-event-delete");
 const eventFeedback = document.getElementById("admin-event-feedback");
 const eventList = document.getElementById("admin-event-list");
@@ -484,6 +487,10 @@ if (galleryForm) {
 const clearEventForm = () => {
   currentEventId = "";
   eventForm?.reset();
+  if (eventImagePreview) {
+    eventImagePreview.innerHTML = "";
+    eventImagePreview.setAttribute("aria-hidden", "true");
+  }
   if (eventFlagSelect) eventFlagSelect.value = "active";
   if (eventDeleteButton) eventDeleteButton.disabled = true;
   if (eventSelect) eventSelect.value = "";
@@ -501,7 +508,17 @@ const fillEventForm = (eventData) => {
   eventLinkInput.value = eventData.link || "";
   eventLastDateInput.value = eventData.lastedate || "";
   eventRequirementsInput.value = eventData.reqirments || "";
+  eventDescInput.value = eventData.desc || "";
   eventFlagSelect.value = eventData.flag === "active" ? "active" : "false";
+
+  if (eventImagePreview && eventData.imageUrl) {
+    eventImagePreview.innerHTML = `<img src="${eventData.imageUrl}" alt="Event Image">`;
+    eventImagePreview.setAttribute("aria-hidden", "false");
+  } else if (eventImagePreview) {
+    eventImagePreview.innerHTML = "";
+    eventImagePreview.setAttribute("aria-hidden", "true");
+  }
+
   eventDeleteButton.disabled = false;
 };
 
@@ -589,6 +606,23 @@ const handleEventSubmit = async (event) => {
     currentEventId = safeId;
   }
 
+  setStatus(eventFeedback, "Saving event...", "");
+
+  let imageUrl = eventsCache.get(currentEventId)?.imageUrl || "";
+
+  // If a new image is selected, upload it
+  if (eventImageInput && eventImageInput.files.length > 0) {
+    try {
+      setStatus(eventFeedback, "Uploading image...", "");
+      const uploadResult = await uploadToImgBB(eventImageInput.files[0]);
+      imageUrl = uploadResult.imageUrl;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setStatus(eventFeedback, "Failed to upload image.", "error");
+      return;
+    }
+  }
+
   const payload = {
     name,
     startdate: eventStartDateInput.value.trim(),
@@ -599,6 +633,8 @@ const handleEventSubmit = async (event) => {
     lastedate: eventLastDateInput.value.trim(),
     local: eventLocationInput.value.trim(),
     reqirments: eventRequirementsInput.value.trim(),
+    desc: eventDescInput.value.trim(),
+    imageUrl,
     flag: eventFlagSelect.value,
   };
 
@@ -613,6 +649,17 @@ const handleEventSubmit = async (event) => {
     setStatus(eventFeedback, "Failed to save event.", "error");
   }
 };
+
+if (eventImageInput) {
+  eventImageInput.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (file && eventImagePreview) {
+      const url = URL.createObjectURL(file);
+      eventImagePreview.innerHTML = `<img src="${url}" alt="Preview">`;
+      eventImagePreview.setAttribute("aria-hidden", "false");
+    }
+  });
+}
 
 const handleEventDelete = async () => {
   if (!currentEventId) return;
