@@ -167,14 +167,7 @@
             </ol>
             <h2>Admin Panel</h2>
           </div>
-          <div class="d-flex gap-2 mt-2 mt-md-0 flex-wrap">
-            <a href="#admin-tools" class="btn btn-info text-white fw-bold d-flex align-items-center gap-1 shadow-sm" style="background: #0ea5e9; border: none; padding: 8px 16px; border-radius: 6px;">
-              <i class="bi bi-images"></i> Manage Gallery & Photos
-            </a>
-            <a href="./admin_add.html" class="btn btn-success fw-bold d-flex align-items-center gap-1 shadow-sm" style="padding: 8px 16px; border-radius: 6px;">
-              <i class="bi bi-plus-circle"></i> Add New Event
-            </a>
-          </div>
+
         </div>
       </section>
       <!-- End Breadcrumbs -->
@@ -183,11 +176,10 @@
       <section class="section-bg py-5" id="portal-manager-section" style="border-bottom: 2px solid #334155;">
         <div class="container">
           <div class="section-title">
-            <h2>📸 Gallery & Photo Manager</h2>
-            <p>Upload new photos via Cloudinary (`iedc_uploads` / ImgBB) directly to your website's 3D Circular Gallery and Slideshow below.</p>
+            <h2> Gallery & Photo Manager</h2>
           </div>
 
-          <div id="admin-login-card" class="admin-card" hidden style="max-width: 500px; margin: 0 auto 30px; background: #1e293b; padding: 24px; border-radius: 12px; border: 1px solid #334155; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5);">
+          <div id="admin-login-card" class="admin-card" style="max-width: 500px; margin: 0 auto 30px; background: #1e293b; padding: 24px; border-radius: 12px; border: 1px solid #334155; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5);">
             <form id="admin-login-form" class="admin-form">
               <h3 style="margin-bottom: 15px; color: #f8fafc; font-size: 22px; display: flex; align-items: center; gap: 8px;"><i class="bi bi-shield-lock"></i> Admin Portal Authentication</h3>
               <p style="color: #94a3b8; font-size: 14px; margin-bottom: 20px;">Please sign in with your admin credentials (`iedcsaintgits@gmail.com`) to unlock the Gallery Manager and Event Editor.</p>
@@ -212,112 +204,157 @@
 
           <div id="admin-logged-in-bar" class="admin-logged-in-bar" hidden style="margin-bottom: 20px; padding: 12px 20px; background: rgba(30, 41, 59, 0.7); border: 1px solid #334155; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; color: #f8fafc;">
             <span id="admin-logged-in-email" style="font-weight: 600;"></span>
-            <button id="adminSignOutButton" class="admin-btn admin-btn-danger" style="padding: 6px 16px; font-size: 14px;">Sign Out</button>
+            <button id="adminSignOutButton" class="admin-btn admin-btn-danger admin-signout" style="padding: 6px 16px; font-size: 14px;">Sign Out</button>
           </div>
 
           <div id="admin-tools" class="admin-tools" hidden style="display: none;">
             <div class="admin-grid">
-              <div class="admin-card" style="border: 2px solid #0ea5e9; box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.3);">
-                <h3 style="color: #38bdf8; display: flex; align-items: center; gap: 8px;"><i class="bi bi-cloud-upload"></i> Upload Photo to Gallery</h3>
+              <div class="admin-card admin-gallery-card">
+                <h3 style="background: linear-gradient(to right, #ef4444, #f87171, #fb923c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; font-size: 26px; display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+                  <span style="background: rgba(239,68,68,0.15); padding: 10px 14px; border-radius: 14px; border: 1px solid rgba(239,68,68,0.45); box-shadow: 0 0 18px rgba(239,68,68,0.35); display: inline-flex; align-items: center; justify-content: center;"><i class="bi bi-cloud-upload-fill" style="color: #ef4444; -webkit-text-fill-color: #ef4444;"></i></span>
+                  Upload Photo to 3D Infinite Gallery
+                </h3>
                 <form id="admin-gallery-form" class="admin-form">
-                  <div class="admin-field">
-                    <label for="admin-gallery-file" style="font-size: 15px; font-weight: bold; color: #f1f5f9;">Select Photo File (PNG, JPG, WebP)</label>
-                    <input id="admin-gallery-file" type="file" accept="image/*" required style="padding: 10px; background: #0f172a; border: 1px solid #38bdf8; border-radius: 6px; color: #fff; width: 100%;" />
+                  <div class="admin-field mb-4">
+                    <label for="admin-gallery-file" style="font-size: 15px; font-weight: 700; color: #e2e8f0; margin-bottom: 8px; display: block;">Select Photo File (PNG, JPG, WebP)</label>
+                    <div class="admin-file-dropzone">
+                      <i class="bi bi-file-earmark-image-fill" style="font-size: 36px; color: #ef4444; margin-bottom: 8px; display: block;"></i>
+                      <span style="color: #f8fafc; font-weight: 600; display: block; font-size: 15px;">Click to Browse or Drag Photo Here</span>
+                      <span style="color: #94a3b8; font-size: 13px;">High resolution JPG, PNG or WebP recommended</span>
+                      <input id="admin-gallery-file" type="file" accept="image/*" required />
+                    </div>
                   </div>
-                  <div id="admin-gallery-preview" class="admin-gallery-preview" aria-hidden="true" style="margin: 10px 0; max-height: 250px; overflow: hidden; border-radius: 8px;"></div>
-                  <div class="admin-field">
-                    <label for="admin-gallery-title">Photo Title</label>
-                    <input id="admin-gallery-title" type="text" placeholder="e.g. Annual Workshop Group Photo" style="background: #0f172a; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 6px; width: 100%;" />
+                  <div id="admin-gallery-preview" class="admin-gallery-preview" aria-hidden="true" style="margin: 14px 0; max-height: 280px; overflow: hidden; border-radius: 14px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);"></div>
+                  <div class="admin-field mb-3">
+                    <label for="admin-gallery-title" style="font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 6px; display: block;">Photo Title</label>
+                    <input id="admin-gallery-title" class="admin-gallery-form-input" type="text" placeholder="e.g. Annual Tech Workshop 2026 Group Photo" />
                   </div>
-                  <div class="admin-field">
-                    <label for="admin-gallery-caption">Caption / Short Description</label>
-                    <textarea id="admin-gallery-caption" rows="3" placeholder="Add a short description that appears below the photo..." style="background: #0f172a; border: 1px solid #334155; color: #fff; padding: 10px; border-radius: 6px; width: 100%;"></textarea>
+                  <div class="admin-field mb-4">
+                    <label for="admin-gallery-caption" style="font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 6px; display: block;">Caption / Short Description</label>
+                    <textarea id="admin-gallery-caption" class="admin-gallery-form-input" rows="3" placeholder="Add a short description that appears below the photo across the website..."></textarea>
                   </div>
-                  <div class="d-flex gap-2 flex-wrap mt-2">
-                    <button id="admin-gallery-submit" class="admin-btn" type="submit" style="background: #ef4444; font-weight: bold; padding: 10px 24px; font-size: 15px; border-radius: 6px; border: none; color: #fff;"><i class="bi bi-check2-circle"></i> Upload to Gallery</button>
-                    <button id="admin-gallery-cancel-edit" class="admin-btn" type="button" style="display: none; background: #64748b; padding: 10px 20px; border-radius: 6px; border: none; color: #fff;">Cancel Edit</button>
+                  <div class="d-flex gap-3 flex-wrap mt-3">
+                    <button id="admin-gallery-submit" class="admin-gallery-submit-btn" type="submit">
+                      <i class="bi bi-cloud-arrow-up-fill" style="font-size: 18px;"></i> Upload to Gallery
+                    </button>
+                    <button id="admin-gallery-cancel-edit" class="admin-btn" type="button" style="display: none; background: #64748b; padding: 14px 24px; border-radius: 12px; border: none; color: #fff; font-weight: 600;">Cancel Edit</button>
                   </div>
-                  <p id="admin-gallery-status" class="admin-status" style="margin-top: 12px; font-weight: 600;"></p>
+                  <p id="admin-gallery-status" class="admin-status" style="margin-top: 16px; font-weight: 600; font-size: 15px;"></p>
                 </form>
-                <hr style="border-color: #334155; margin: 24px 0;" />
-                <h4 style="color: #e2e8f0; margin-bottom: 16px; font-size: 18px;"><i class="bi bi-collection"></i> Existing Uploaded Gallery Photos</h4>
+                <div style="display: flex; align-items: center; gap: 16px; margin: 38px 0 24px;">
+                  <div style="flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.45));"></div>
+                  <span style="color: #ef4444; font-weight: 700; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase;"><i class="bi bi-collection-play-fill me-2"></i>Live Gallery Inventory</span>
+                  <div style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(239, 68, 68, 0.45), transparent);"></div>
+                </div>
                 <div class="admin-gallery-list" id="admin-gallery-list"></div>
               </div>
 
-              <div class="admin-card">
-                <h3>Event Manager</h3>
-                <div class="admin-field">
-                  <label for="admin-event-select">Select event to edit</label>
-                  <div class="admin-select-row">
-                    <select id="admin-event-select" style="background: #0f172a; color: #fff; border: 1px solid #334155; padding: 10px; border-radius: 6px; flex: 1;">
-                      <option value="">Create new event</option>
+              <div class="admin-card admin-gallery-card">
+                <h3 style="background: linear-gradient(to right, #ef4444, #f87171, #fb923c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; font-size: 26px; display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+                  <span style="background: rgba(239,68,68,0.15); padding: 10px 14px; border-radius: 14px; border: 1px solid rgba(239,68,68,0.45); box-shadow: 0 0 18px rgba(239,68,68,0.35); display: inline-flex; align-items: center; justify-content: center;"><i class="bi bi-calendar-event-fill" style="color: #ef4444; -webkit-text-fill-color: #ef4444;"></i></span>
+                  Event Manager Portal
+                </h3>
+
+                <div class="admin-field mb-4" style="background: rgba(30, 41, 59, 0.6); padding: 18px; border-radius: 16px; border: 1px solid rgba(239, 68, 68, 0.35);">
+                  <label for="admin-event-select" style="font-size: 14px; font-weight: 700; color: #f87171; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; display: block;"><i class="bi bi-funnel-fill me-2"></i>Select Event to Edit or Create New</label>
+                  <div class="d-flex gap-3 align-items: center flex-wrap">
+                    <select id="admin-event-select" class="admin-gallery-form-input" style="flex: 1; min-width: 200px; cursor: pointer;">
+                      <option value="">+ Create new event</option>
                     </select>
-                    <button id="admin-event-new" class="admin-btn admin-btn-ghost" type="button">New</button>
+                    <button id="admin-event-new" type="button" style="background: rgba(239, 68, 68, 0.2); border: 1.5px solid #ef4444; color: #fff; font-weight: 700; padding: 12px 24px; border-radius: 12px; transition: all 0.3s ease; white-space: nowrap; cursor: pointer; box-shadow: 0 0 12px rgba(239, 68, 68, 0.2);"><i class="bi bi-plus-circle-fill me-2"></i>New Event</button>
                   </div>
                 </div>
+
                 <form id="admin-event-form" class="admin-form">
-                  <div class="admin-field">
-                    <label for="admin-event-name">Event name</label>
-                    <input id="admin-event-name" type="text" required placeholder="Innovators Summit" style="background: #0f172a; color: #fff; border: 1px solid #334155; padding: 10px; border-radius: 6px; width: 100%;" />
+                  <div class="admin-field mb-4">
+                    <label for="admin-event-name" style="font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 6px; display: block;">Event Name</label>
+                    <input id="admin-event-name" class="admin-gallery-form-input" type="text" required placeholder="e.g. Innovators Summit 2026" />
                   </div>
-                  <div class="admin-field">
-                    <label for="admin-event-image">Event Image</label>
-                    <input id="admin-event-image" type="file" accept="image/*" style="background: #0f172a; color: #fff; border: 1px solid #334155; padding: 10px; border-radius: 6px; width: 100%;" />
-                    <div id="admin-event-image-preview" class="admin-gallery-preview" aria-hidden="true"></div>
-                  </div>
-                  <div class="admin-field">
-                    <label for="admin-event-desc">Full Description</label>
-                    <textarea id="admin-event-desc" rows="5" placeholder="Detailed event description, agenda, etc." style="background: #0f172a; color: #fff; border: 1px solid #334155; padding: 10px; border-radius: 6px; width: 100%;"></textarea>
-                  </div>
-                  <div class="admin-field-group">
-                    <div class="admin-field">
-                      <label for="admin-event-start-date">Start date</label>
-                      <input id="admin-event-start-date" type="text" placeholder="12 Oct 2026" style="background: #0f172a; color: #fff; border: 1px solid #334155; padding: 10px; border-radius: 6px; width: 100%;" />
+
+                  <div class="admin-field mb-4">
+                    <label for="admin-event-image" style="font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 6px; display: block;">Event Banner Image (JPG, PNG, WebP)</label>
+                    <div class="admin-file-dropzone">
+                      <i class="bi bi-image-fill" style="font-size: 36px; color: #ef4444; margin-bottom: 8px; display: block;"></i>
+                      <span style="color: #f8fafc; font-weight: 600; display: block; font-size: 15px;">Click to Browse or Drag Event Banner Here</span>
+                      <span style="color: #94a3b8; font-size: 13px;">High resolution 16:9 ratio recommended for homepage display</span>
+                      <input id="admin-event-image" type="file" accept="image/*" />
                     </div>
-                    <div class="admin-field">
-                      <label for="admin-event-start-time">Time from</label>
-                      <input id="admin-event-start-time" type="text" placeholder="9:00 AM" style="background: #0f172a; color: #fff; border: 1px solid #334155; padding: 10px; border-radius: 6px; width: 100%;" />
-                    </div>
+                    <div id="admin-event-image-preview" class="admin-gallery-preview" aria-hidden="true" style="margin-top: 14px; border-radius: 14px; overflow: hidden; max-height: 260px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);"></div>
                   </div>
-                  <div class="admin-field-group">
-                    <div class="admin-field">
-                      <label for="admin-event-end-date">End date</label>
-                      <input id="admin-event-end-date" type="text" placeholder="12 Oct 2026" style="background: #0f172a; color: #fff; border: 1px solid #334155; padding: 10px; border-radius: 6px; width: 100%;" />
+
+                  <div class="admin-field mb-4">
+                    <label for="admin-event-desc" style="font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 6px; display: block;">Full Description / Agenda</label>
+                    <textarea id="admin-event-desc" class="admin-gallery-form-input" rows="5" placeholder="Detailed event description, schedule, speakers, topics, etc."></textarea>
+                  </div>
+
+                  <div class="d-flex gap-3 flex-wrap mb-4">
+                    <div class="admin-field" style="flex: 1; min-width: 220px;">
+                      <label for="admin-event-start-date" style="font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 6px; display: block;"><i class="bi bi-calendar3 me-1 text-danger"></i> Start Date</label>
+                      <input id="admin-event-start-date" class="admin-gallery-form-input" type="text" placeholder="12 Oct 2026" />
                     </div>
-                    <div class="admin-field">
-                      <label for="admin-event-end-time">Time to</label>
-                      <input id="admin-event-end-time" type="text" placeholder="4:00 PM" style="background: #0f172a; color: #fff; border: 1px solid #334155; padding: 10px; border-radius: 6px; width: 100%;" />
+                    <div class="admin-field" style="flex: 1; min-width: 220px;">
+                      <label for="admin-event-start-time" style="font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 6px; display: block;"><i class="bi bi-clock me-1 text-danger"></i> Start Time</label>
+                      <input id="admin-event-start-time" class="admin-gallery-form-input" type="text" placeholder="9:00 AM" />
                     </div>
                   </div>
-                  <div class="admin-field">
-                    <label for="admin-event-location">Location</label>
-                    <input id="admin-event-location" type="text" placeholder="SCIE Lab" style="background: #0f172a; color: #fff; border: 1px solid #334155; padding: 10px; border-radius: 6px; width: 100%;" />
+
+                  <div class="d-flex gap-3 flex-wrap mb-4">
+                    <div class="admin-field" style="flex: 1; min-width: 220px;">
+                      <label for="admin-event-end-date" style="font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 6px; display: block;"><i class="bi bi-calendar3-event me-1 text-danger"></i> End Date</label>
+                      <input id="admin-event-end-date" class="admin-gallery-form-input" type="text" placeholder="12 Oct 2026" />
+                    </div>
+                    <div class="admin-field" style="flex: 1; min-width: 220px;">
+                      <label for="admin-event-end-time" style="font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 6px; display: block;"><i class="bi bi-clock-history me-1 text-danger"></i> End Time</label>
+                      <input id="admin-event-end-time" class="admin-gallery-form-input" type="text" placeholder="4:00 PM" />
+                    </div>
                   </div>
-                  <div class="admin-field">
-                    <label for="admin-event-link">Registration link</label>
-                    <input id="admin-event-link" type="url" placeholder="https://forms.gle/" style="background: #0f172a; color: #fff; border: 1px solid #334155; padding: 10px; border-radius: 6px; width: 100%;" />
+
+                  <div class="admin-field mb-4">
+                    <label for="admin-event-location" style="font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 6px; display: block;"><i class="bi bi-geo-alt-fill me-1 text-danger"></i> Event Location / Venue</label>
+                    <input id="admin-event-location" class="admin-gallery-form-input" type="text" placeholder="e.g. Main Auditorium / SCIE Lab" />
                   </div>
-                  <div class="admin-field">
-                    <label for="admin-event-last-date">Register before</label>
-                    <input id="admin-event-last-date" type="text" placeholder="10 Oct, 11:59 PM" style="background: #0f172a; color: #fff; border: 1px solid #334155; padding: 10px; border-radius: 6px; width: 100%;" />
+
+                  <div class="admin-field mb-4">
+                    <label for="admin-event-link" style="font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 6px; display: block;"><i class="bi bi-link-45deg me-1 text-danger"></i> Registration Link (Google Forms / Portal URL)</label>
+                    <input id="admin-event-link" class="admin-gallery-form-input" type="url" placeholder="https://forms.gle/your-form-id" />
                   </div>
-                  <div class="admin-field">
-                    <label for="admin-event-req">Requirements</label>
-                    <textarea id="admin-event-req" rows="3" placeholder="Laptop, basic HTML" style="background: #0f172a; color: #fff; border: 1px solid #334155; padding: 10px; border-radius: 6px; width: 100%;"></textarea>
+
+                  <div class="admin-field mb-4">
+                    <label for="admin-event-last-date" style="font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 6px; display: block;"><i class="bi bi-hourglass-split me-1 text-danger"></i> Register Before (Deadline)</label>
+                    <input id="admin-event-last-date" class="admin-gallery-form-input" type="text" placeholder="10 Oct, 11:59 PM" />
                   </div>
-                  <div class="admin-field">
-                    <label for="admin-event-flag">Status</label>
-                    <select id="admin-event-flag" style="background: #0f172a; color: #fff; border: 1px solid #334155; padding: 10px; border-radius: 6px; width: 100%;">
-                      <option value="active">Active (show on home)</option>
-                      <option value="false">Inactive</option>
+
+                  <div class="admin-field mb-4">
+                    <label for="admin-event-req" style="font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 6px; display: block;"><i class="bi bi-list-check me-1 text-danger"></i> Requirements for Attendees</label>
+                    <textarea id="admin-event-req" class="admin-gallery-form-input" rows="3" placeholder="e.g. Laptop, Basic HTML knowledge, College ID card"></textarea>
+                  </div>
+
+                  <div class="admin-field mb-4">
+                    <label for="admin-event-flag" style="font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 6px; display: block;"><i class="bi bi-toggle-on me-1 text-danger"></i> Event Display Status</label>
+                    <select id="admin-event-flag" class="admin-gallery-form-input" style="cursor: pointer;">
+                      <option value="active">🟢 Active (Displayed across Homepage & Calendar)</option>
+                      <option value="false">🔴 Inactive (Hidden)</option>
                     </select>
                   </div>
-                  <div class="admin-action-row">
-                    <button class="admin-btn" type="submit">Save event</button>
-                    <button id="admin-event-delete" class="admin-btn admin-btn-danger" type="button" disabled>Delete event</button>
+
+                  <div class="d-flex gap-3 flex-wrap mt-4">
+                    <button class="admin-gallery-submit-btn" type="submit">
+                      <i class="bi bi-cloud-check-fill" style="font-size: 18px;"></i> Save & Publish Event
+                    </button>
+                    <button id="admin-event-delete" class="admin-btn" type="button" disabled style="background: rgba(100, 116, 139, 0.3); border: 1px solid rgba(100, 116, 139, 0.5); padding: 14px 26px; border-radius: 12px; color: #cbd5e1; font-weight: 600; transition: all 0.3s ease; cursor: pointer;">
+                      <i class="bi bi-trash3-fill me-2"></i> Delete Event
+                    </button>
                   </div>
-                  <p id="admin-event-feedback" class="admin-status"></p>
+
+                  <p id="admin-event-feedback" class="admin-status" style="margin-top: 16px; font-weight: 600; font-size: 15px;"></p>
                 </form>
+
+                <div style="display: flex; align-items: center; gap: 16px; margin: 38px 0 24px;">
+                  <div style="flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.45));"></div>
+                  <span style="color: #ef4444; font-weight: 700; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase;"><i class="bi bi-calendar-check-fill me-2"></i>Live Events Directory</span>
+                  <div style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(239, 68, 68, 0.45), transparent);"></div>
+                </div>
+
                 <div class="admin-event-list" id="admin-event-list"></div>
               </div>
             </div>

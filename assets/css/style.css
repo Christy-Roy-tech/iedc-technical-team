@@ -2393,24 +2393,36 @@ section {
 }
 
 .admin-portal .admin-event-list-item {
-  padding: 0.65rem 0.75rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(0, 0, 0, 0.02);
+  padding: 1rem 1.25rem !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(239, 68, 68, 0.35) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  background: rgba(30, 41, 59, 0.85) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+  color: #f8fafc !important;
+  transition: all 0.3s ease !important;
+}
+
+.admin-portal .admin-event-list-item:hover {
+  background: rgba(30, 41, 59, 0.98) !important;
+  border-color: #ef4444 !important;
+  transform: translateX(4px) !important;
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.25) !important;
 }
 
 .admin-portal .admin-event-status-pill {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 0.2rem 0.6rem;
-  border-radius: var(--radius-pill);
-  background: rgba(168, 27, 41, 0.12);
-  color: var(--color-primary);
+  font-size: 0.75rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  padding: 0.35rem 0.85rem !important;
+  border-radius: 9999px !important;
+  background: rgba(239, 68, 68, 0.2) !important;
+  border: 1px solid #ef4444 !important;
+  color: #ff8080 !important;
+  font-weight: 700 !important;
 }
 
 .admin-portal .admin-event-status-pill.inactive {
@@ -3446,3 +3458,194 @@ button:hover .button-text {
   width: 100%;
   height: 100%;
 }
+
+/* ── VIP Admin Navbar Special Badge & Position ───────────────────────────── */
+.vip-admin-nav-chip {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(185, 28, 28, 0.35)) !important;
+  border: 1.5px solid rgba(248, 113, 113, 0.75) !important;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.45), inset 0 0 12px rgba(239, 68, 68, 0.25) !important;
+  border-radius: 9999px !important;
+  padding: 6px 18px !important;
+  margin: 0 8px !important;
+  text-decoration: none !important;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+  line-height: 1.2 !important;
+}
+
+.vip-admin-nav-chip .nav-text-stack {
+  display: inline !important;
+  height: auto !important;
+  overflow: visible !important;
+  transform: none !important;
+}
+
+.vip-admin-nav-chip .nav-text-stack span:nth-child(2) {
+  display: none !important;
+}
+
+.vip-admin-nav-chip:hover {
+  background: linear-gradient(135deg, #ef4444, #b91c1c) !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 0 28px rgba(239, 68, 68, 0.9), 0 0 18px rgba(248, 113, 113, 0.7) !important;
+  transform: translateY(-2px) scale(1.06) !important;
+}
+
+.vip-admin-nav-chip .admin-badge-icon {
+  color: #f87171 !important;
+  font-size: 15px !important;
+  transition: color 0.3s ease !important;
+}
+
+.vip-admin-nav-chip:hover .admin-badge-icon {
+  color: #ffffff !important;
+}
+
+.vip-admin-nav-chip .admin-badge-text {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.6px !important;
+  text-transform: uppercase !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+}
+
+.vip-admin-nav-chip .admin-badge-pulse {
+  width: 8px !important;
+  height: 8px !important;
+  background-color: #ef4444 !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 10px #ef4444 !important;
+  animation: adminPulseGlow 1.5s infinite !important;
+}
+
+.vip-admin-nav-chip:hover .admin-badge-pulse {
+  background-color: #ffffff !important;
+  box-shadow: 0 0 12px #ffffff !important;
+}
+
+@keyframes adminPulseGlow {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.45); opacity: 0.5; }
+}
+
+/* ── Premium Gallery Portal UI (Admin Dashboard - Red VIP Theme) ────────── */
+.admin-gallery-card {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85)) !important;
+  border: 1px solid rgba(239, 68, 68, 0.5) !important;
+  border-radius: 22px !important;
+  padding: 38px !important;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75), 0 0 35px rgba(239, 68, 68, 0.2) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.admin-gallery-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ef4444, #f87171, #fb923c, #ef4444);
+}
+
+.admin-file-dropzone {
+  background: rgba(15, 23, 42, 0.85);
+  border: 2px dashed rgba(239, 68, 68, 0.6);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.admin-file-dropzone:hover {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: #ef4444;
+  box-shadow: 0 0 22px rgba(239, 68, 68, 0.35);
+  transform: translateY(-2px);
+}
+
+.admin-file-dropzone input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.admin-gallery-form-input {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border: 1px solid rgba(51, 65, 85, 0.9) !important;
+  color: #f8fafc !important;
+  padding: 14px 18px !important;
+  border-radius: 12px !important;
+  font-size: 15px !important;
+  width: 100% !important;
+  transition: all 0.3s ease !important;
+}
+
+.admin-gallery-form-input:focus {
+  outline: none !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4) !important;
+  background: rgba(15, 23, 42, 0.98) !important;
+}
+
+.admin-gallery-submit-btn {
+  background: linear-gradient(135deg, #ef4444, #f97316) !important;
+  box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.5) !important;
+  border-radius: 12px !important;
+  padding: 14px 34px !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  letter-spacing: 0.5px !important;
+  border: none !important;
+  color: #ffffff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+}
+
+.admin-gallery-submit-btn:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 15px 30px -5px rgba(239, 68, 68, 0.7) !important;
+  background: linear-gradient(135deg, #f87171, #fb923c) !important;
+}
+
+/* Gallery Item Cards in Admin List */
+.admin-gallery-list .gallery-item-card {
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(51, 65, 85, 0.8);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.admin-gallery-list .gallery-item-card:hover {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: rgba(56, 189, 248, 0.5);
+  transform: translateX(4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+

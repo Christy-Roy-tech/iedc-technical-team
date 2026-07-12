@@ -66,6 +66,7 @@
     let topLinks = select("#navbar > ul > li > a.nav-link", true);
     topLinks.forEach((link) => {
       if (link.classList.contains("nav-hover-link")) return;
+      if (link.classList.contains("vip-admin-nav-chip") || link.classList.contains("nav-auth-chip") || link.closest("#adminNavLoginItem")) return;
       if (link.closest(".dropdown")) return;
       if (link.querySelector(".nav-text-stack")) return;
 

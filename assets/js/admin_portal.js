@@ -21,7 +21,14 @@ import {
   updateDoc,
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
-import { initCircularGallery } from "./circular_gallery.js";
+
+const loadAndInitCircularGallery = (items) => {
+  if (document.getElementById("circular-gallery-container") || document.querySelector(".portfolio-container")) {
+    import("./circular_gallery.js").then(({ initCircularGallery }) => {
+      initCircularGallery(items);
+    }).catch(e => console.warn("Could not load 3D circular gallery script:", e));
+  }
+};
 
 /* ── Config ─────────────────────────────────────────────────── */
 const ADMIN_EMAIL = "iedcsaintgits@gmail.com";
@@ -46,7 +53,7 @@ const adminLoginSpinner = document.querySelector(".admin-login-spinner");
 const adminLoginStatus = document.getElementById("admin-login-status");
 const adminLoggedInBar = document.getElementById("admin-logged-in-bar");
 const adminLoggedInEmail = document.getElementById("admin-logged-in-email");
-const adminSignOutButton = document.getElementById("admin-signout");
+const adminSignOutButton = document.getElementById("admin-signout") || document.getElementById("adminSignOutButton") || document.querySelector(".admin-signout");
 const adminTools = document.getElementById("admin-tools");
 
 // Gallery elements
@@ -329,7 +336,7 @@ const renderPublicGallery = (items) => {
       image: it.imageUrl,
       text: it.title || "IEDC Snapshot",
     }));
-  initCircularGallery(circularItems);
+  loadAndInitCircularGallery(circularItems);
 
   if (!portfolioContainer) return;
 
@@ -847,7 +854,8 @@ const updateAdminUI = (user) => {
 
   if (!adminTools) return;
 
-  if (user && user.email && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+  const effectiveUser = user || auth.currentUser;
+  if (effectiveUser && effectiveUser.email && effectiveUser.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
     // Authenticated admin
     if (adminLoginForm) adminLoginForm.hidden = true;
     if (adminLoginCard) {
@@ -859,7 +867,7 @@ const updateAdminUI = (user) => {
       adminLoggedInBar.style.display = "flex";
     }
     if (adminLoggedInEmail) {
-      adminLoggedInEmail.textContent = `Signed in as ${user.email}`;
+      adminLoggedInEmail.textContent = `Signed in as ${effectiveUser.email}`;
     }
     adminTools.hidden = false;
     adminTools.style.display = "block";
@@ -884,10 +892,10 @@ const updateAdminUI = (user) => {
     adminTools.style.display = "none";
     adminTools.classList.remove("admin-tools-visible");
 
-    if (user) {
+    if (effectiveUser) {
       setStatus(
         adminLoginStatus,
-        `Signed in as ${user.email}. Admin access required.`,
+        `Signed in as ${effectiveUser.email}. Admin access required.`,
         "error"
       );
     }
@@ -908,7 +916,11 @@ if (adminSignOutButton) {
 }
 
 if (document.getElementById("circular-gallery-container") && !portfolioContainer) {
-  initCircularGallery([]);
+  loadAndInitCircularGallery([]);
 }
 
+// Immediate initial sync check in case auth is already cached
+if (auth.currentUser) {
+  updateAdminUI(auth.currentUser);
+}
 onAuthStateChanged(auth, updateAdminUI);
