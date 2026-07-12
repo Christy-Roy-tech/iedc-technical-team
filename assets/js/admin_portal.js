@@ -47,7 +47,7 @@ const adminLoginForm = document.getElementById("admin-login-form");
 const adminEmailInput = document.getElementById("admin-email");
 const adminPasswordInput = document.getElementById("admin-password");
 const adminTogglePassword = document.getElementById("admin-toggle-password");
-const adminLoginSubmit = document.querySelector(".admin-login-submit");
+const adminLoginSubmit = document.getElementById("admin-login-submit") || document.querySelector(".admin-login-submit");
 const adminLoginBtnText = document.querySelector(".admin-login-btn-text");
 const adminLoginSpinner = document.querySelector(".admin-login-spinner");
 const adminLoginStatus = document.getElementById("admin-login-status");
@@ -193,8 +193,11 @@ const handleInlineLogin = async (e) => {
   setStatus(adminLoginStatus, "Signing in...", "");
 
   try {
-    await signInWithEmailAndPassword(auth, email, password);
-    // onAuthStateChanged will handle the UI update
+    const userCred = await signInWithEmailAndPassword(auth, email, password);
+    setStatus(adminLoginStatus, "Authenticated! Unlocking Gallery & Event Manager...", "success");
+    if (typeof updateAdminUI === "function") {
+      updateAdminUI(userCred.user || auth.currentUser);
+    }
   } catch (error) {
     console.error("Login error:", error);
     let msg = "Login failed. Please try again.";
@@ -860,17 +863,17 @@ const updateAdminUI = (user) => {
     if (adminLoginForm) adminLoginForm.hidden = true;
     if (adminLoginCard) {
       adminLoginCard.hidden = true;
-      adminLoginCard.style.display = "none";
+      adminLoginCard.style.setProperty("display", "none", "important");
     }
     if (adminLoggedInBar) {
       adminLoggedInBar.hidden = false;
-      adminLoggedInBar.style.display = "flex";
+      adminLoggedInBar.style.setProperty("display", "flex", "important");
     }
     if (adminLoggedInEmail) {
       adminLoggedInEmail.textContent = `Signed in as ${effectiveUser.email}`;
     }
     adminTools.hidden = false;
-    adminTools.style.display = "block";
+    adminTools.style.setProperty("display", "block", "important");
     adminTools.classList.add("admin-tools-visible");
     setStatus(adminLoginStatus, "", "");
     setLoginLoading(false);
