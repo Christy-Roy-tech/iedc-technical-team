@@ -885,11 +885,11 @@ const updateAdminUI = (user) => {
     if (adminLoginForm) adminLoginForm.hidden = false;
     if (adminLoginCard) {
       adminLoginCard.hidden = false;
-      adminLoginCard.style.display = "block";
+      adminLoginCard.style.setProperty("display", "block", "important");
     }
     if (adminLoggedInBar) {
       adminLoggedInBar.hidden = true;
-      adminLoggedInBar.style.display = "none";
+      adminLoggedInBar.style.setProperty("display", "none", "important");
     }
     adminTools.hidden = true;
     adminTools.style.display = "none";
