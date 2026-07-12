@@ -1,0 +1,87 @@
+@import url("./tokens.css");
+
+.events .event {
+    position: relative;
+    box-shadow: var(--shadow-soft);
+    padding: 30px;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    transition: 0.5s;
+    height: 100%;
+}
+
+
+.add-event-form .dt-label {
+    color: var(--color-muted-text);
+}
+
+.add-event-form .form-floating textarea {
+    height: 120px;
+}
+
+.add-event .add-event-form button[type="submit"] {
+    background: var(--color-primary);
+    border: 0;
+    padding: 12px 34px;
+    color: var(--color-white);
+    transition: 0.4s;
+    border-radius: var(--radius-pill);
+}
+
+.add-event .add-event-form button[type="submit"]:hover {
+    background: var(--color-primary-strong);
+    /* #209dd8 */
+}
+
+@media (max-width: 1024px) {
+
+    .add-event .content,
+    .add-event {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 992px) {
+    .add-event .content {
+        padding-top: 30px;
+    }
+}
+
+
+/* ===== Order Info ======  */
+.accordion-item {
+    border-radius: var(--radius-sm);
+    border: 0.5px solid var(--color-border-strong);
+}
+
+.accordion-header button {
+    background-color: var(--color-surface) !important;
+}
+
+.accordion-header img {
+    width: 130px;
+    aspect-ratio: 4/3;
+    object-fit: contain;
+}
+
+.accordion-header button {
+    background: var(--color-white);        /* #faf5f3 */
+}
+
+.accordion-header button:focus {
+    background: var(--color-white);
+}
+
+
+/* ========= ADMIN EDIT =========== */
+#event-data {
+    display: none;
+}
+
+
+/* ========= VIEW IDEAS ==========  */
+
+.accordion-item {
+    margin-bottom: 10px;
+}

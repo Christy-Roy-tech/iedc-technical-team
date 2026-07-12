@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Big Idea Submission Portal</title>
+    <meta
+      content="Submit startup and project ideas to IEDC Saintgits through the Big Idea Portal."
+      name="description"
+    />
+    <meta content="IEDC, idea portal, innovation, startup" name="keywords" />
+
+    <link href="../assets/img/Icons/favicon.ico" rel="icon" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="../assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <link href="../assets/css/tokens.css" rel="stylesheet" />
+    <link href="../assets/css/idea-portal-modern.css" rel="stylesheet" />
+  </head>
+
+  <body class="idea-portal-page modern-idea-portal">
+    <div class="bg-orb orb-one" aria-hidden="true"></div>
+    <div class="bg-orb orb-two" aria-hidden="true"></div>
+
+    <main class="portal-main">
+      <section class="portal-hero">
+        <a class="home-link" href="../index.html"
+          ><i class="bi bi-arrow-left"></i> Back to Home</a
+        >
+        <p class="eyebrow">IEDC SAINTGITS</p>
+        <h1>Big Idea Submission Portal</h1>
+        <p class="hero-copy">
+          Turn raw concepts into real ventures. Share your idea with the IEDC
+          team and get guidance for validation, execution, and growth.
+        </p>
+
+        <div id="layeredText" class="layered-text-block" aria-hidden="true">
+          <ul class="layered-text-list"></ul>
+        </div>
+      </section>
+
+      <section class="portal-layout">
+        <aside class="portal-info">
+          <div class="info-card">
+            <h3> What To Submit</h3>
+            <p>
+              Product ideas, startup concepts, campus innovations, technical
+              prototypes, or social-impact solutions.
+            </p>
+          </div>
+          <div class="info-card">
+            <h3>What Happens Next</h3>
+            <p>
+              Your submission is reviewed by the IEDC team, then shortlisted
+              ideas are contacted for mentorship and support.
+            </p>
+          </div>
+          <div class="info-card">
+            <h3> Data Handling</h3>
+            <p>
+              Submissions are stored securely for admin review only and used to
+              evaluate idea potential and team readiness.
+            </p>
+          </div>
+        </aside>
+
+        <section class="form-shell" id="book-slot">
+          <div class="form-head">
+            <h2>Submit Your Idea</h2>
+            <p>Complete all fields accurately. Our team will get in touch.</p>
+          </div>
+
+          <form class="modern-form" novalidate>
+            <div class="form-grid two-col">
+              <div class="field">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" required />
+              </div>
+              <div class="field">
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" required />
+              </div>
+            </div>
+
+            <div class="form-grid one-col">
+              <div class="field">
+                <label for="email">Email</label>
+                <input type="email" id="email" required />
+              </div>
+              <div class="field">
+                <label for="phno">Phone Number</label>
+                <input type="number" id="phno" required />
+              </div>
+            </div>
+
+            <div class="form-grid two-col">
+              <div class="field">
+                <label for="year">Academic Year</label>
+                <select name="year" id="year" required>
+                  <option disabled selected value="">-- Choose --</option>
+                  <option value="1st year">1st year</option>
+                  <option value="2nd year">2nd year</option>
+                  <option value="3rd year">3rd year</option>
+                  <option value="4th year">4th year</option>
+                  <option value="5th year">5th year</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="branch">Branch</label>
+                <select name="branch" id="branch" required>
+                  <option disabled selected value="">-- Choose --</option>
+                  <option value="chem">Chemical Engineering</option>
+                  <option value="civil">Civil Engineering</option>
+                  <option value="cse">Computer Science and Engineering</option>
+                  <option value="ece">
+                    Electronics and Communication Engineering
+                  </option>
+                  <option value="vlsi">VLSI Design and Technology</option>
+                  <option value="ecse">
+                    Electronics and Computer Engineering
+                  </option>
+                  <option value="eee">
+                    Electrical and Electronics Engineering
+                  </option>
+                  <option value="ft">Food Technology</option>
+                  <option value="me">Mechanical Engineering</option>
+                  <option value="rb">Robotics and Automation</option>
+                  <option value="mca">Master of Computer Applications</option>
+                  <option value="imca">
+                    Master of Computer Applications Integrated
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid one-col">
+              <div class="field">
+                <label for="ideatitle">Idea Title</label>
+                <input type="text" id="ideatitle" required />
+              </div>
+
+              <div class="field">
+                <label for="description">Idea Description</label>
+                <textarea id="description" rows="4" required></textarea>
+              </div>
+
+              <div class="field">
+                <label for="insights"
+                  >Team Insights and Current Progress</label
+                >
+                <textarea id="insights" rows="4" required></textarea>
+              </div>
+            </div>
+
+            <input type="hidden" id="dateandtime" />
+
+            <div class="submit-wrap">
+              <button type="submit" id="submit" class="submit-btn">
+                Submit Idea
+              </button>
+            </div>
+          </form>
+        </section>
+      </section>
+    </main>
+
+    <footer class="portal-footer" id="footer">
+      <div class="footer-inner">
+        <div>
+          <h4>IEDC@SAINTGITS</h4>
+          <p>
+            Saintgits College of Engineering, Kottukulam Hills, Pathamuttom,
+            Kottayam, Kerala 686532
+          </p>
+        </div>
+        <div class="footer-links">
+          <a href="../index.html">Home</a>
+          <a href="../pages/devteam.html">Development Team</a>
+          <a href="mailto:iedc@saintgits.org">iedc@saintgits.org</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-auth.js"></script>
+
+    <script src="../assets/js/idea-portal.js"></script>
+    <script type="module" src="../assets/js/user_ideas.js"></script>
+  </body>
+</html>

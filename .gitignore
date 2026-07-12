@@ -1,0 +1,9 @@
+# Local configuration / secrets
+assets/js/config.js
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+assets.zip
