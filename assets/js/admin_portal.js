@@ -855,26 +855,35 @@ const updateAdminUI = (user) => {
     fetchGalleryItems().then(renderPublicGallery);
   }
 
-  if (!adminTools) return;
+  // Dynamically fetch elements to ensure always up to date even if DOM was loaded after script parse
+  const liveAdminTools = document.getElementById("admin-tools") || adminTools;
+  const liveAdminLoginCard = document.getElementById("admin-login-card") || adminLoginCard;
+  const liveAdminLoginForm = document.getElementById("admin-login-form") || adminLoginForm;
+  const liveAdminLoggedInBar = document.getElementById("admin-logged-in-bar") || adminLoggedInBar;
+  const liveAdminLoggedInEmail = document.getElementById("admin-logged-in-email") || adminLoggedInEmail;
+
+  if (!liveAdminTools && !liveAdminLoginCard) return;
 
   const effectiveUser = user || auth.currentUser;
   if (effectiveUser && effectiveUser.email && effectiveUser.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
     // Authenticated admin
-    if (adminLoginForm) adminLoginForm.hidden = true;
-    if (adminLoginCard) {
-      adminLoginCard.hidden = true;
-      adminLoginCard.style.setProperty("display", "none", "important");
+    if (liveAdminLoginForm) liveAdminLoginForm.hidden = true;
+    if (liveAdminLoginCard) {
+      liveAdminLoginCard.hidden = true;
+      liveAdminLoginCard.style.setProperty("display", "none", "important");
     }
-    if (adminLoggedInBar) {
-      adminLoggedInBar.hidden = false;
-      adminLoggedInBar.style.setProperty("display", "flex", "important");
+    if (liveAdminLoggedInBar) {
+      liveAdminLoggedInBar.hidden = false;
+      liveAdminLoggedInBar.style.setProperty("display", "flex", "important");
     }
-    if (adminLoggedInEmail) {
-      adminLoggedInEmail.textContent = `Signed in as ${effectiveUser.email}`;
+    if (liveAdminLoggedInEmail) {
+      liveAdminLoggedInEmail.textContent = `Signed in as ${effectiveUser.email}`;
     }
-    adminTools.hidden = false;
-    adminTools.style.setProperty("display", "block", "important");
-    adminTools.classList.add("admin-tools-visible");
+    if (liveAdminTools) {
+      liveAdminTools.hidden = false;
+      liveAdminTools.style.setProperty("display", "block", "important");
+      liveAdminTools.classList.add("admin-tools-visible");
+    }
     setStatus(adminLoginStatus, "", "");
     setLoginLoading(false);
 
@@ -882,18 +891,20 @@ const updateAdminUI = (user) => {
     refreshGallery(); // loads both public gallery + admin list
   } else {
     // Not admin or not logged in
-    if (adminLoginForm) adminLoginForm.hidden = false;
-    if (adminLoginCard) {
-      adminLoginCard.hidden = false;
-      adminLoginCard.style.setProperty("display", "block", "important");
+    if (liveAdminLoginForm) liveAdminLoginForm.hidden = false;
+    if (liveAdminLoginCard) {
+      liveAdminLoginCard.hidden = false;
+      liveAdminLoginCard.style.setProperty("display", "block", "important");
     }
-    if (adminLoggedInBar) {
-      adminLoggedInBar.hidden = true;
-      adminLoggedInBar.style.setProperty("display", "none", "important");
+    if (liveAdminLoggedInBar) {
+      liveAdminLoggedInBar.hidden = true;
+      liveAdminLoggedInBar.style.setProperty("display", "none", "important");
     }
-    adminTools.hidden = true;
-    adminTools.style.display = "none";
-    adminTools.classList.remove("admin-tools-visible");
+    if (liveAdminTools) {
+      liveAdminTools.hidden = true;
+      liveAdminTools.style.display = "none";
+      liveAdminTools.classList.remove("admin-tools-visible");
+    }
 
     if (effectiveUser) {
       setStatus(
