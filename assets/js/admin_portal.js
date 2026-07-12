@@ -922,8 +922,6 @@ if (document.getElementById("circular-gallery-container") && !portfolioContainer
   loadAndInitCircularGallery([]);
 }
 
-// Immediate initial sync check in case auth is already cached
-if (auth.currentUser) {
-  updateAdminUI(auth.currentUser);
-}
+// Immediate initial sync check
+updateAdminUI(auth.currentUser);
 onAuthStateChanged(auth, updateAdminUI);

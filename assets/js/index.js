@@ -19,6 +19,8 @@ const db = getFirestore(app);
 const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
   if (user) {
+    const dashBtn = document.getElementById("Dashboard");
+    if (dashBtn) dashBtn.style.display = "";
     const uid = user.uid;
     addSignoutButton();
 
