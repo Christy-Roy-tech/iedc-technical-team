@@ -1,5 +1,5 @@
 import {firebaseConfig} from './firebase.js'
-  firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
   var db = firebase.firestore();
   const usersCollection = db.collection("Orders");
   const auth = firebase.auth();

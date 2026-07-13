@@ -7,7 +7,7 @@ const firebaseConfig = {
   appId: "1:316951208655:web:135659271b8dc1aa5e8dba",
   measurementId: "G-8QR1CJEL4F",
 };
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
 var db = firebase.firestore();
 const usersCollection = db.collection("Orders");
 const auth = firebase.auth();

@@ -1,5 +1,5 @@
 import { firebaseConfig } from "./firebase.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-analytics.js";
 import {
   getAuth,
@@ -14,8 +14,8 @@ import {
   deleteDoc,
   doc,
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
-const app = initializeApp(firebaseConfig);
-const auth = getAuth();
+const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const db = getFirestore(app);
 onAuthStateChanged(auth, (user) => {
   if (user) {

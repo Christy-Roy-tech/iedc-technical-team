@@ -1,5 +1,5 @@
 import { firebaseConfig } from "./firebase.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
 import {
   getFirestore,
   collection,
@@ -7,7 +7,7 @@ import {
   orderBy,
   getDocs,
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
-const app = initializeApp(firebaseConfig);
+const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const ideasQuery = query(collection(db, "ideas"), orderBy("timestamp", "desc"));
 const querySnapshot = await getDocs(ideasQuery);

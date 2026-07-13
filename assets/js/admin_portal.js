@@ -171,30 +171,37 @@ const uploadImage = async (file) => {
 /* ── Inline Login ───────────────────────────────────────────── */
 
 const setLoginLoading = (loading) => {
-  if (!adminLoginSubmit) return;
-  adminLoginSubmit.disabled = loading;
-  if (adminLoginBtnText) adminLoginBtnText.hidden = loading;
-  if (adminLoginSpinner) adminLoginSpinner.hidden = !loading;
+  const liveSubmit = document.getElementById("admin-login-submit") || adminLoginSubmit;
+  const liveBtnText = document.querySelector(".admin-login-btn-text") || adminLoginBtnText;
+  const liveSpinner = document.querySelector(".admin-login-spinner") || adminLoginSpinner;
+  if (!liveSubmit) return;
+  liveSubmit.disabled = loading;
+  if (liveBtnText) liveBtnText.hidden = loading;
+  if (liveSpinner) liveSpinner.hidden = !loading;
 };
 
 const handleInlineLogin = async (e) => {
-  e.preventDefault();
-  if (!adminEmailInput || !adminPasswordInput) return;
+  if (e && typeof e.preventDefault === "function") e.preventDefault();
+  const liveEmailInput = document.getElementById("admin-email") || adminEmailInput;
+  const livePasswordInput = document.getElementById("admin-password") || adminPasswordInput;
+  const liveStatus = document.getElementById("admin-login-status") || adminLoginStatus;
 
-  const email = adminEmailInput.value.trim();
-  const password = adminPasswordInput.value;
+  if (!liveEmailInput || !livePasswordInput) return;
+
+  const email = liveEmailInput.value.trim();
+  const password = livePasswordInput.value;
 
   if (!email || !password) {
-    setStatus(adminLoginStatus, "Enter email and password.", "error");
+    setStatus(liveStatus, "Enter email and password.", "error");
     return;
   }
 
   setLoginLoading(true);
-  setStatus(adminLoginStatus, "Signing in...", "");
+  setStatus(liveStatus, "Signing in...", "");
 
   try {
     const userCred = await signInWithEmailAndPassword(auth, email, password);
-    setStatus(adminLoginStatus, "Authenticated! Unlocking Gallery & Event Manager...", "success");
+    setStatus(liveStatus, "Authenticated! Unlocking Gallery & Event Manager...", "success");
     if (typeof updateAdminUI === "function") {
       updateAdminUI(userCred.user || auth.currentUser);
     }
@@ -213,26 +220,81 @@ const handleInlineLogin = async (e) => {
     else if (error.code === "auth/too-many-requests")
       msg = "Too many attempts. Try again later.";
 
-    setStatus(adminLoginStatus, msg, "error");
+    setStatus(liveStatus, msg, "error");
     setLoginLoading(false);
   }
 };
 
-// Password visibility toggle
-if (adminTogglePassword && adminPasswordInput) {
-  adminTogglePassword.addEventListener("click", () => {
-    const isPassword = adminPasswordInput.type === "password";
-    adminPasswordInput.type = isPassword ? "text" : "password";
-    const icon = adminTogglePassword.querySelector("i");
-    if (icon) {
-      icon.className = isPassword ? "bi bi-eye" : "bi bi-eye-slash";
-    }
-  });
-}
+const initAdminPortalListeners = () => {
+  const liveTogglePassword = document.getElementById("admin-toggle-password");
+  if (liveTogglePassword && !liveTogglePassword.dataset.listenerAttached) {
+    liveTogglePassword.dataset.listenerAttached = "true";
+    liveTogglePassword.addEventListener("click", () => {
+      const livePassInput = document.getElementById("admin-password");
+      if (!livePassInput) return;
+      const isPassword = livePassInput.type === "password";
+      livePassInput.type = isPassword ? "text" : "password";
+      const icon = liveTogglePassword.querySelector("i");
+      if (icon) {
+        icon.className = isPassword ? "bi bi-eye" : "bi bi-eye-slash";
+      }
+    });
+  }
 
-if (adminLoginForm) {
-  adminLoginForm.addEventListener("submit", handleInlineLogin);
-}
+  const liveLoginForm = document.getElementById("admin-login-form");
+  if (liveLoginForm && !liveLoginForm.dataset.listenerAttached) {
+    liveLoginForm.dataset.listenerAttached = "true";
+    liveLoginForm.addEventListener("submit", handleInlineLogin);
+  }
+
+  const liveGalleryForm = document.getElementById("admin-gallery-form");
+  if (liveGalleryForm && !liveGalleryForm.dataset.listenerAttached) {
+    liveGalleryForm.dataset.listenerAttached = "true";
+    liveGalleryForm.addEventListener("submit", handleGalleryUpload);
+  }
+
+  const liveCancelEditBtn = document.getElementById("admin-gallery-cancel-edit");
+  if (liveCancelEditBtn && !liveCancelEditBtn.dataset.listenerAttached) {
+    liveCancelEditBtn.dataset.listenerAttached = "true";
+    liveCancelEditBtn.addEventListener("click", cancelGalleryEdit);
+  }
+
+  const liveEventForm = document.getElementById("admin-event-form");
+  if (liveEventForm && !liveEventForm.dataset.listenerAttached) {
+    liveEventForm.dataset.listenerAttached = "true";
+    liveEventForm.addEventListener("submit", handleEventSubmit);
+  }
+
+  const liveEventSelect = document.getElementById("admin-event-select");
+  if (liveEventSelect && !liveEventSelect.dataset.listenerAttached) {
+    liveEventSelect.dataset.listenerAttached = "true";
+    liveEventSelect.addEventListener("change", () => {
+      const selectedId = liveEventSelect.value;
+      if (!selectedId) {
+        clearEventForm();
+        return;
+      }
+      const data = eventsCache.get(selectedId);
+      currentEventId = selectedId;
+      fillEventForm(data);
+    });
+  }
+
+  const liveEventNewBtn = document.getElementById("admin-event-new");
+  if (liveEventNewBtn && !liveEventNewBtn.dataset.listenerAttached) {
+    liveEventNewBtn.dataset.listenerAttached = "true";
+    liveEventNewBtn.addEventListener("click", () => clearEventForm());
+  }
+
+  const liveEventDelBtn = document.getElementById("admin-event-delete");
+  if (liveEventDelBtn && !liveEventDelBtn.dataset.listenerAttached) {
+    liveEventDelBtn.dataset.listenerAttached = "true";
+    liveEventDelBtn.addEventListener("click", handleEventDelete);
+  }
+};
+
+initAdminPortalListeners();
+document.addEventListener("DOMContentLoaded", initAdminPortalListeners);
 
 /* ── Gallery: Portfolio Rendering ───────────────────────────── */
 
@@ -844,6 +906,9 @@ if (eventDeleteButton) {
 /* ── Auth State → UI Toggle ─────────────────────────────────── */
 
 const updateAdminUI = (user) => {
+  if (typeof initAdminPortalListeners === "function") {
+    initAdminPortalListeners();
+  }
   // Show navbar Admin Portal link only when admin is logged in
   const adminNavItem = document.getElementById("adminNavLoginItem");
   if (adminNavItem) {

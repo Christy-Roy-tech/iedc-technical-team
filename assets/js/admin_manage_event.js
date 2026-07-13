@@ -1,5 +1,5 @@
 import { firebaseConfig } from "./firebase.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-analytics.js";
 import {
   getFirestore,
@@ -11,7 +11,7 @@ import {
   updateDoc,
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
 
-const app = initializeApp(firebaseConfig);
+const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const querySnapshot = await getDocs(collection(db, "Events"));

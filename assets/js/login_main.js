@@ -36,7 +36,7 @@ function _0x264c(_0x2dd396, _0x14a58b) {
     _0x264c(_0x2dd396, _0x14a58b)
   );
 }
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
 function _0x2c53() {
   const _0x12364b = [
     "6582WiaESI",
@@ -96,9 +96,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
-const app = initializeApp(firebaseConfig),
+const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig),
   analytics = getAnalytics(app),
-  auth = getAuth();
+  auth = getAuth(app);
 login[_0x14238e(0x15b)]("click", (_0x41f9aa) => {
   const _0x29ff43 = _0x14238e;
   _0x41f9aa[_0x29ff43(0x154)]();

@@ -1,7 +1,7 @@
 import { firebaseConfig } from "./firebase.js";
 
-firebase.initializeApp(firebaseConfig);
-var db = firebase.firestore();
+if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+const db = firebase.firestore();
 const usersCollection = db.collection("ideas");
 const auth = firebase.auth();
 
