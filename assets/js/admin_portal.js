@@ -209,7 +209,7 @@ const handleInlineLogin = async (e) => {
       updateAdminUI(userCred.user || auth.currentUser);
     }
   } catch (error) {
-    console.error("Login error:", error);
+    console.error("Login error:", error.code, error.message, error);
     let msg = "Login failed. Please try again.";
     if (error.code === "auth/invalid-email") msg = "Invalid email address.";
     else if (
@@ -222,6 +222,11 @@ const handleInlineLogin = async (e) => {
       msg = "No account found with this email.";
     else if (error.code === "auth/too-many-requests")
       msg = "Too many attempts. Try again later.";
+    else if (error.code === "auth/network-request-failed")
+      msg = "Network error. Check your internet connection.";
+    
+    // Show the actual error code for debugging
+    msg += ` [${error.code || "unknown"}]`;
 
     setStatus(liveStatus, msg, "error");
     setLoginLoading(false);
