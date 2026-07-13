@@ -209,8 +209,13 @@ const handleInlineLogin = async (e) => {
       updateAdminUI(userCred.user || auth.currentUser);
     }
   } catch (error) {
-    console.error("Login error:", error.code, error.message, error);
-    let msg = "Login failed. Please try again.";
+    console.error("Login error:", error);
+    // Show FULL error detail for debugging
+    const errDetail = error.code 
+      ? `[${error.code}] ${error.message}` 
+      : `[${error.name || "Error"}] ${error.message || error.toString()}`;
+    
+    let msg = "";
     if (error.code === "auth/invalid-email") msg = "Invalid email address.";
     else if (
       error.code === "auth/wrong-password" ||
@@ -224,9 +229,10 @@ const handleInlineLogin = async (e) => {
       msg = "Too many attempts. Try again later.";
     else if (error.code === "auth/network-request-failed")
       msg = "Network error. Check your internet connection.";
+    else
+      msg = "Login failed.";
     
-    // Show the actual error code for debugging
-    msg += ` [${error.code || "unknown"}]`;
+    msg += " DEBUG: " + errDetail;
 
     setStatus(liveStatus, msg, "error");
     setLoginLoading(false);
