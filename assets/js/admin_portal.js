@@ -25,7 +25,7 @@ import {
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
 
-const loadAndInitCircularGallery = (items) => {
+function loadAndInitCircularGallery(items) {
   if (document.getElementById("circular-gallery-container") || document.querySelector(".portfolio-container")) {
     import("./circular_gallery.js").then(({ initCircularGallery }) => {
       initCircularGallery(items);
@@ -94,7 +94,7 @@ let eventsCache = new Map();
 
 /* ── Utilities ──────────────────────────────────────────────── */
 
-const setStatus = (el, message, tone) => {
+function setStatus(el, message, tone) {
   if (!el) return;
   el.textContent = message;
   el.classList.remove("is-error", "is-success");
@@ -104,7 +104,7 @@ const setStatus = (el, message, tone) => {
 
 /* ── Robust Image Upload (Event Manager setup + ImgBB + Base64 fallback) ── */
 
-const uploadImage = async (file) => {
+async function uploadImage(file) {
   // Validate file type
   const allowedTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
   if (!allowedTypes.includes(file.type)) {
@@ -173,7 +173,7 @@ const uploadImage = async (file) => {
 
 /* ── Inline Login ───────────────────────────────────────────── */
 
-const setLoginLoading = (loading) => {
+function setLoginLoading(loading) {
   const liveSubmit = document.getElementById("admin-login-submit") || adminLoginSubmit;
   const liveBtnText = document.querySelector(".admin-login-btn-text") || adminLoginBtnText;
   const liveSpinner = document.querySelector(".admin-login-spinner") || adminLoginSpinner;
@@ -183,7 +183,7 @@ const setLoginLoading = (loading) => {
   if (liveSpinner) liveSpinner.hidden = !loading;
 };
 
-const handleInlineLogin = async (e) => {
+async function handleInlineLogin(e) {
   if (e && typeof e.preventDefault === "function") e.preventDefault();
   const liveEmailInput = document.getElementById("admin-email") || adminEmailInput;
   const livePasswordInput = document.getElementById("admin-password") || adminPasswordInput;
@@ -237,7 +237,7 @@ const handleInlineLogin = async (e) => {
   }
 };
 
-const initAdminPortalListeners = () => {
+function initAdminPortalListeners() {
   const liveTogglePassword = document.getElementById("admin-toggle-password");
   if (liveTogglePassword && !liveTogglePassword.dataset.listenerAttached) {
     liveTogglePassword.dataset.listenerAttached = "true";
@@ -310,7 +310,7 @@ document.addEventListener("DOMContentLoaded", initAdminPortalListeners);
 
 /* ── Gallery: Portfolio Rendering ───────────────────────────── */
 
-const createPortfolioItem = (item) => {
+function createPortfolioItem(item) {
   const wrapper = document.createElement("div");
   wrapper.className = "col-lg-4 col-md-6 portfolio-item";
   wrapper.dataset.galleryId = item.id;
@@ -355,7 +355,7 @@ const createPortfolioItem = (item) => {
   return wrapper;
 };
 
-const waitForImages = (elements) => {
+function waitForImages(elements) {
   const images = [];
   elements.forEach((el) => {
     const imgs = el.tagName === "IMG" ? [el] : el.querySelectorAll("img");
@@ -374,7 +374,7 @@ const waitForImages = (elements) => {
 };
 
 /** Get the live Isotope instance that main.js created, or null. */
-const getIsotopeInstance = () => {
+function getIsotopeInstance() {
   if (!portfolioContainer || !window.Isotope) return null;
   try {
     return window.Isotope.data(portfolioContainer) || null;
@@ -383,13 +383,13 @@ const getIsotopeInstance = () => {
   }
 };
 
-const refreshLightbox = () => {
+function refreshLightbox() {
   if (window.GLightbox) {
     GLightbox({ selector: ".portfolio-lightbox" });
   }
 };
 
-const fetchGalleryItems = async () => {
+async function fetchGalleryItems() {
   try {
     const snapshot = await getDocs(collection(db, "Gallery"));
     const items = [];
@@ -405,7 +405,7 @@ const fetchGalleryItems = async () => {
 
 let renderGeneration = 0;
 
-const renderPublicGallery = (items) => {
+function renderPublicGallery(items) {
   /* Initialize interactive 3D Circular WebGL Gallery with full color photos */
   const circularItems = (items || [])
     .filter((it) => it && it.imageUrl)
@@ -487,7 +487,7 @@ const renderPublicGallery = (items) => {
 
 let currentEditingGalleryId = null;
 
-const renderGalleryList = (items) => {
+function renderGalleryList(items) {
   if (!galleryList) return;
   galleryList.innerHTML = "";
 
@@ -581,7 +581,7 @@ const renderGalleryList = (items) => {
   });
 };
 
-const refreshGallery = async () => {
+async function refreshGallery() {
   const items = await fetchGalleryItems();
   renderPublicGallery(items);
   renderGalleryList(items);
@@ -589,7 +589,7 @@ const refreshGallery = async () => {
 
 /* ── Gallery: Preview, Cancel & Upload/Update ───────────────── */
 
-const showPreview = (file) => {
+function showPreview(file) {
   if (!galleryPreview) return;
   galleryPreview.innerHTML = "";
   if (!file) {
@@ -606,7 +606,7 @@ const showPreview = (file) => {
   galleryPreview.setAttribute("aria-hidden", "false");
 };
 
-const cancelGalleryEdit = () => {
+function cancelGalleryEdit() {
   currentEditingGalleryId = null;
   galleryForm?.reset();
   if (galleryFileInput) galleryFileInput.setAttribute("required", "true");
@@ -618,7 +618,7 @@ const cancelGalleryEdit = () => {
   setStatus(galleryStatus, "", "");
 };
 
-const handleGalleryUpload = async (event) => {
+async function handleGalleryUpload(event) {
   event.preventDefault();
   if (!currentEditingGalleryId && (!galleryFileInput || !galleryFileInput.files.length)) {
     setStatus(galleryStatus, "Select an image to upload.", "error");
@@ -694,7 +694,7 @@ if (cancelEditBtn) {
 
 /* ── Events: CRUD ───────────────────────────────────────────── */
 
-const clearEventForm = () => {
+function clearEventForm() {
   currentEventId = "";
   eventForm?.reset();
   if (eventImagePreview) {
@@ -707,7 +707,7 @@ const clearEventForm = () => {
   setStatus(eventFeedback, "", "");
 };
 
-const fillEventForm = (eventData) => {
+function fillEventForm(eventData) {
   if (!eventData) return;
   eventNameInput.value = eventData.name || "";
   eventStartDateInput.value = eventData.startdate || "";
@@ -732,7 +732,7 @@ const fillEventForm = (eventData) => {
   eventDeleteButton.disabled = false;
 };
 
-const renderEventSelect = (events) => {
+function renderEventSelect(events) {
   if (!eventSelect) return;
   eventSelect.innerHTML = "";
   const placeholder = document.createElement("option");
@@ -748,7 +748,7 @@ const renderEventSelect = (events) => {
   });
 };
 
-const renderEventList = (events) => {
+function renderEventList(events) {
   if (!eventList) return;
   eventList.innerHTML = "";
 
@@ -782,7 +782,7 @@ const renderEventList = (events) => {
   });
 };
 
-const loadEvents = async () => {
+async function loadEvents() {
   try {
     const snapshot = await getDocs(collection(db, "Events"));
     const events = [];
@@ -802,7 +802,7 @@ const loadEvents = async () => {
   }
 };
 
-const handleEventSubmit = async (event) => {
+async function handleEventSubmit(event) {
   event.preventDefault();
 
   const name = eventNameInput.value.trim();
@@ -871,7 +871,7 @@ if (eventImageInput) {
   });
 }
 
-const handleEventDelete = async () => {
+async function handleEventDelete() {
   if (!currentEventId) return;
   const confirmed = window.confirm(
     "Delete this event? This cannot be undone."
