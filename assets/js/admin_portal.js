@@ -205,9 +205,7 @@ const handleInlineLogin = async (e) => {
   try {
     const userCred = await signInWithEmailAndPassword(auth, email, password);
     setStatus(liveStatus, "Authenticated! Unlocking Gallery & Event Manager...", "success");
-    if (typeof updateAdminUI === "function") {
-      updateAdminUI(userCred.user || auth.currentUser);
-    }
+    updateAdminUI(userCred.user || auth.currentUser);
   } catch (error) {
     console.error("Login error:", error);
     // Show FULL error detail for debugging
@@ -919,10 +917,8 @@ if (eventDeleteButton) {
 
 /* ── Auth State → UI Toggle ─────────────────────────────────── */
 
-const updateAdminUI = (user) => {
-  if (typeof initAdminPortalListeners === "function") {
-    initAdminPortalListeners();
-  }
+function updateAdminUI(user) {
+  initAdminPortalListeners();
   // Show navbar Admin Portal link only when admin is logged in
   const adminNavItem = document.getElementById("adminNavLoginItem");
   if (adminNavItem) {
@@ -994,7 +990,7 @@ const updateAdminUI = (user) => {
     }
     setLoginLoading(false);
   }
-};
+}
 
 if (adminSignOutButton) {
   adminSignOutButton.addEventListener("click", () => {
