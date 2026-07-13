@@ -1,5 +1,8 @@
 import { firebaseConfig } from "./firebase.js";
-import { CLOUDINARY_CLOUD_NAME, CLOUDINARY_UPLOAD_PRESET } from "./config.js";
+/* Config values inlined to prevent module crash if config.js is missing on deployment */
+const CLOUDINARY_CLOUD_NAME = "dtz3a6oxn";
+const CLOUDINARY_UPLOAD_PRESET = "iedc_uploads";
+const IMGBB_API_KEY = "371192ecce95dd54ec3de29ae55e7146";
 import {
   initializeApp,
   getApps,
