@@ -1584,8 +1584,8 @@ section {
 /* ── CTA Link Overlay — positioned over "EMBARK ON OUR 3D JOURNEY →" ── */
 .gallery-hero-cta {
   position: absolute;
-  bottom: 14%;
-  left: 5.5%;
+  bottom: 17.1%;
+  left: 7.1%;
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -1622,8 +1622,8 @@ section {
 /* ── Quote Card Arrow Overlay — positioned over the arrow circle ── */
 .gallery-hero-quote-btn {
   position: absolute;
-  bottom: 8%;
-  right: 6.5%;
+  bottom: 15.1%;
+  right: 7.4%;
   width: clamp(32px, 4vw, 48px);
   height: clamp(32px, 4vw, 48px);
   border-radius: 50%;
@@ -1649,7 +1649,7 @@ section {
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .gallery-hero-cta {
-    bottom: 3.5%;
+    bottom: 4.2%;
     left: 50%;
     transform: translateX(-50%);
     width: auto;
@@ -1671,8 +1671,8 @@ section {
   }
 
   .gallery-hero-quote-btn {
-    bottom: 12.2%;
-    right: 12%;
+    bottom: 12.4%;
+    right: 14.3%;
     width: 44px;
     height: 44px;
   }
@@ -1680,7 +1680,7 @@ section {
 
 @media (max-width: 575.98px) {
   .gallery-hero-cta {
-    bottom: 3%;
+    bottom: 3.8%;
     padding: 4px 0;
   }
 
@@ -1689,8 +1689,8 @@ section {
   }
 
   .gallery-hero-quote-btn {
-    bottom: 12.2%;
-    right: 12.5%;
+    bottom: 12.9%;
+    right: 15.3%;
     width: 34px;
     height: 34px;
   }
