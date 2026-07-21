@@ -1562,6 +1562,142 @@ section {
 }
 
 /*--------------------------------------------------------------
+# Gallery Hero (Image-based with interactive overlays)
+--------------------------------------------------------------*/
+.gallery-hero-section {
+  padding: 0;
+  overflow: hidden;
+}
+
+.gallery-hero-wrap {
+  position: relative;
+  width: 100%;
+  line-height: 0;
+}
+
+.gallery-hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── CTA Link Overlay — positioned over "EMBARK ON OUR 3D JOURNEY →" ── */
+.gallery-hero-cta {
+  position: absolute;
+  bottom: 14%;
+  left: 5.5%;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 4px;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+  z-index: 5;
+  cursor: pointer;
+}
+
+.gallery-hero-cta span {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(0.65rem, 1.2vw, 0.88rem);
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  color: transparent;
+  text-transform: uppercase;
+}
+
+.gallery-hero-cta-arrow {
+  font-size: clamp(0.9rem, 1.4vw, 1.3rem);
+  color: transparent !important;
+}
+
+.gallery-hero-cta:hover {
+  border-bottom-color: #2D1B1B;
+}
+
+.gallery-hero-cta:hover span {
+  color: transparent;
+}
+
+/* ── Quote Card Arrow Overlay — positioned over the arrow circle ── */
+.gallery-hero-quote-btn {
+  position: absolute;
+  bottom: 8%;
+  right: 6.5%;
+  width: clamp(32px, 4vw, 48px);
+  height: clamp(32px, 4vw, 48px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  z-index: 5;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-hero-quote-arrow {
+  color: transparent;
+  font-size: 1.2rem;
+}
+
+.gallery-hero-quote-btn:hover {
+  transform: scale(1.12);
+  box-shadow: 0 4px 16px rgba(122, 30, 42, 0.25);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .gallery-hero-cta {
+    bottom: 3.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    text-align: center;
+    justify-content: center;
+    border-bottom: 2px solid transparent;
+  }
+
+  .gallery-hero-cta:hover {
+    border-bottom-color: #2D1B1B;
+  }
+
+  .gallery-hero-cta span {
+    font-size: 0.8rem;
+  }
+
+  .gallery-hero-cta-arrow {
+    font-size: 1.1rem;
+  }
+
+  .gallery-hero-quote-btn {
+    bottom: 12.2%;
+    right: 12%;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .gallery-hero-cta {
+    bottom: 3%;
+    padding: 4px 0;
+  }
+
+  .gallery-hero-cta span {
+    font-size: 0.72rem;
+  }
+
+  .gallery-hero-quote-btn {
+    bottom: 12.2%;
+    right: 12.5%;
+    width: 34px;
+    height: 34px;
+  }
+}
+
+
+/*--------------------------------------------------------------
 # Portfolio
 --------------------------------------------------------------*/
 .portfolio {
