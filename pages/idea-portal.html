@@ -53,6 +53,26 @@
 
       <section class="portal-layout">
         <aside class="portal-info">
+          <div class="info-card" id="track-idea-card">
+            <h3>Track Your Idea</h3>
+            <p>
+              Already submitted an idea? Enter your tracking code below to check
+              its review status and feedback.
+            </p>
+            <div class="d-flex gap-2 mt-2">
+              <input
+                type="text"
+                id="trackCodeInput"
+                class="form-control"
+                placeholder="e.g. IEDC-A1B2C3"
+                style="text-transform: uppercase"
+              />
+              <button type="button" id="trackBtn" class="btn btn-primary">
+                Check
+              </button>
+            </div>
+            <div id="trackResult" class="mt-3" style="display: none"></div>
+          </div>
           <div class="info-card">
             <h3> What To Submit</h3>
             <p>
