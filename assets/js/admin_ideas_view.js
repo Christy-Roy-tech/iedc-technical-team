@@ -19,10 +19,28 @@ querySnapshot.forEach((doc) => {
   const data = doc.data();
   const status = data.status || "Pending";
   const trackingCode = data.trackingCode || "N/A";
+  const groupId = data.groupId || "N/A";
+  const groupName = data.groupName || `${data.firstname || ""} ${data.lname || ""}`.trim();
   const adminMessage = data.adminMessage || "";
   let badgeClass = "bg-warning text-dark";
   if (status === "Approved") badgeClass = "bg-success";
   else if (status === "Disapproved") badgeClass = "bg-danger";
+
+  const membersHtml = Array.isArray(data.members) && data.members.length
+    ? data.members
+        .map(
+          (m, idx) => `
+          <li>
+            <strong>Member ${idx + 1}:</strong> ${m.name} (${m.branch} - Year ${m.year}, ${m.semester})<br>
+            <small>Email: ${m.email} | Phone: ${m.phone}</small>
+          </li>`
+        )
+        .join("")
+    : `
+      <li>Email: ${data.email || "N/A"}</li>
+      <li>Phone: ${data.phno || "N/A"}</li>
+      <li>Class: ${data.year || ""} ${data.branch || ""}</li>
+    `;
 
   function displayEvent(eventData) {
     const eventContainer = document.getElementById("accordionFlushExample");
@@ -34,7 +52,8 @@ querySnapshot.forEach((doc) => {
       <h2 class="accordion-header" style="border-radius: 5px;">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
       data-bs-target="#${collapseId}" aria-expanded="false" aria-controls="${collapseId}">
-            ${data.ideatitle} &emsp; | &emsp;<span>${data.firstname} ${data.lname}</span>
+            ${data.ideatitle} &emsp; | &emsp;<span>${groupName}</span>
+            &emsp;<span class="badge bg-info text-dark ms-2">${groupId}</span>
             &emsp;<span class="badge bg-secondary ms-2">${trackingCode}</span>
             &emsp;<span class="badge ${badgeClass} ms-2" id="badge-${doc.id}">${status}</span>
           </button>
@@ -45,17 +64,12 @@ querySnapshot.forEach((doc) => {
           <span style="color:red">${data.timestamp}</span> 
               <ul class="idea-list">
                   <li>
+                      Group Name: <strong>${groupName}</strong> | Group ID: <strong>${groupId}</strong>
+                  </li>
+                  <li>
                       Tracking Code: <strong>${trackingCode}</strong>
                   </li>
-                  <li>
-                      Email: ${data.email}
-                  </li>
-                  <li>
-                      Phone: ${data.phno}
-                  </li>
-                  <li>
-                      Class: ${data.year} ${data.branch}
-                  </li>
+                  ${membersHtml}
                   <li>
                       Description: <br>
                       ${data.description}
