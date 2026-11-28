@@ -73,6 +73,13 @@
             </div>
             <div id="trackResult" class="mt-3" style="display: none"></div>
           </div>
+          <div class="info-card" id="my-ideas-card" style="display: none">
+            <h3>My Submitted Ideas</h3>
+            <p class="small text-muted mb-2">
+              Your recent submissions and their live review status:
+            </p>
+            <div id="myIdeasList"></div>
+          </div>
           <div class="info-card">
             <h3> What To Submit</h3>
             <p>
@@ -98,75 +105,215 @@
 
         <section class="form-shell" id="book-slot">
           <div class="form-head">
-            <h2>Submit Your Idea</h2>
-            <p>Complete all fields accurately. Our team will get in touch.</p>
+            <h2>Submit Your Group Idea</h2>
+            <p>
+              Create a group of 2 to 3 members. All fields are required for
+              registered members.
+            </p>
           </div>
 
-          <form class="modern-form" novalidate>
-            <div class="form-grid two-col">
-              <div class="field">
-                <label for="fname">First Name</label>
-                <input type="text" id="fname" required />
-              </div>
-              <div class="field">
-                <label for="lname">Last Name</label>
-                <input type="text" id="lname" required />
-              </div>
-            </div>
+          <div
+            id="loginPrompt"
+            class="alert alert-info"
+            style="display: none; margin-bottom: 1.5rem"
+          >
+            <p class="mb-2">
+              <strong>Login Required:</strong> Please log in with your student
+              account to submit a group idea and track it automatically.
+            </p>
+            <a href="./login.html" class="btn btn-primary btn-sm"
+              >Login / Sign Up</a
+            >
+          </div>
 
+          <form class="modern-form" id="ideaFormContainer" novalidate>
             <div class="form-grid one-col">
               <div class="field">
-                <label for="email">Email</label>
-                <input type="email" id="email" required />
-              </div>
-              <div class="field">
-                <label for="phno">Phone Number</label>
-                <input type="number" id="phno" required />
+                <label for="groupName">Group Name</label>
+                <input
+                  type="text"
+                  id="groupName"
+                  placeholder="e.g. Innovators"
+                  required
+                />
               </div>
             </div>
 
+            <h5 class="mt-3 mb-2">Member 1 (Team Lead)</h5>
             <div class="form-grid two-col">
               <div class="field">
-                <label for="year">Academic Year</label>
-                <select name="year" id="year" required>
+                <label for="m1_name">Full Name</label>
+                <input type="text" id="m1_name" required />
+              </div>
+              <div class="field">
+                <label for="m1_branch">Branch</label>
+                <select id="m1_branch" required>
                   <option disabled selected value="">-- Choose --</option>
-                  <option value="1st year">1st year</option>
-                  <option value="2nd year">2nd year</option>
-                  <option value="3rd year">3rd year</option>
-                  <option value="4th year">4th year</option>
-                  <option value="5th year">5th year</option>
+                  <option value="ECE">Electronics (ECE)</option>
+                  <option value="EEE">Electrical & Electronics (EEE)</option>
+                  <option value="CSE">Computer Science (CSE)</option>
+                  <option value="RB">Robotics & Automation (RB)</option>
+                  <option value="ER">Electronics & Computer (ER)</option>
+                  <option value="EV">Electronics & VLSI (EV)</option>
+                  <option value="CE">Civil Engineering (CE)</option>
+                  <option value="ME">Mechanical Engineering (ME)</option>
                 </select>
               </div>
-
               <div class="field">
-                <label for="branch">Branch</label>
-                <select name="branch" id="branch" required>
+                <label for="m1_year">Year</label>
+                <select id="m1_year" required>
                   <option disabled selected value="">-- Choose --</option>
-                  <option value="chem">Chemical Engineering</option>
-                  <option value="civil">Civil Engineering</option>
-                  <option value="cse">Computer Science and Engineering</option>
-                  <option value="ece">
-                    Electronics and Communication Engineering
-                  </option>
-                  <option value="vlsi">VLSI Design and Technology</option>
-                  <option value="ecse">
-                    Electronics and Computer Engineering
-                  </option>
-                  <option value="eee">
-                    Electrical and Electronics Engineering
-                  </option>
-                  <option value="ft">Food Technology</option>
-                  <option value="me">Mechanical Engineering</option>
-                  <option value="rb">Robotics and Automation</option>
-                  <option value="mca">Master of Computer Applications</option>
-                  <option value="imca">
-                    Master of Computer Applications Integrated
-                  </option>
+                  <option value="1">1st Year</option>
+                  <option value="2">2nd Year</option>
+                  <option value="3">3rd Year</option>
+                  <option value="4">4th Year</option>
                 </select>
+              </div>
+              <div class="field">
+                <label for="m1_sem">Semester</label>
+                <select id="m1_sem" required>
+                  <option disabled selected value="">-- Choose --</option>
+                  <option value="S1">S1</option>
+                  <option value="S2">S2</option>
+                  <option value="S3">S3</option>
+                  <option value="S4">S4</option>
+                  <option value="S5">S5</option>
+                  <option value="S6">S6</option>
+                  <option value="S7">S7</option>
+                  <option value="S8">S8</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="m1_email">Email ID</label>
+                <input type="email" id="m1_email" required />
+              </div>
+              <div class="field">
+                <label for="m1_phone">Mobile Number</label>
+                <input type="number" id="m1_phone" required />
               </div>
             </div>
 
-            <div class="form-grid one-col">
+            <h5 class="mt-4 mb-2">Member 2</h5>
+            <div class="form-grid two-col">
+              <div class="field">
+                <label for="m2_name">Full Name</label>
+                <input type="text" id="m2_name" required />
+              </div>
+              <div class="field">
+                <label for="m2_branch">Branch</label>
+                <select id="m2_branch" required>
+                  <option disabled selected value="">-- Choose --</option>
+                  <option value="ECE">Electronics (ECE)</option>
+                  <option value="EEE">Electrical & Electronics (EEE)</option>
+                  <option value="CSE">Computer Science (CSE)</option>
+                  <option value="RB">Robotics & Automation (RB)</option>
+                  <option value="ER">Electronics & Computer (ER)</option>
+                  <option value="EV">Electronics & VLSI (EV)</option>
+                  <option value="CE">Civil Engineering (CE)</option>
+                  <option value="ME">Mechanical Engineering (ME)</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="m2_year">Year</label>
+                <select id="m2_year" required>
+                  <option disabled selected value="">-- Choose --</option>
+                  <option value="1">1st Year</option>
+                  <option value="2">2nd Year</option>
+                  <option value="3">3rd Year</option>
+                  <option value="4">4th Year</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="m2_sem">Semester</label>
+                <select id="m2_sem" required>
+                  <option disabled selected value="">-- Choose --</option>
+                  <option value="S1">S1</option>
+                  <option value="S2">S2</option>
+                  <option value="S3">S3</option>
+                  <option value="S4">S4</option>
+                  <option value="S5">S5</option>
+                  <option value="S6">S6</option>
+                  <option value="S7">S7</option>
+                  <option value="S8">S8</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="m2_email">Email ID</label>
+                <input type="email" id="m2_email" required />
+              </div>
+              <div class="field">
+                <label for="m2_phone">Mobile Number</label>
+                <input type="number" id="m2_phone" required />
+              </div>
+            </div>
+
+            <div class="mt-3 mb-2">
+              <button
+                type="button"
+                id="toggleMember3Btn"
+                class="btn btn-outline-secondary btn-sm"
+              >
+                + Add 3rd Member (Optional)
+              </button>
+            </div>
+
+            <div id="member3Section" style="display: none">
+              <h5 class="mt-3 mb-2">Member 3</h5>
+              <div class="form-grid two-col">
+                <div class="field">
+                  <label for="m3_name">Full Name</label>
+                  <input type="text" id="m3_name" />
+                </div>
+                <div class="field">
+                  <label for="m3_branch">Branch</label>
+                  <select id="m3_branch">
+                    <option disabled selected value="">-- Choose --</option>
+                    <option value="ECE">Electronics (ECE)</option>
+                    <option value="EEE">Electrical & Electronics (EEE)</option>
+                    <option value="CSE">Computer Science (CSE)</option>
+                    <option value="RB">Robotics & Automation (RB)</option>
+                    <option value="ER">Electronics & Computer (ER)</option>
+                    <option value="EV">Electronics & VLSI (EV)</option>
+                    <option value="CE">Civil Engineering (CE)</option>
+                    <option value="ME">Mechanical Engineering (ME)</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="m3_year">Year</label>
+                  <select id="m3_year">
+                    <option disabled selected value="">-- Choose --</option>
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="m3_sem">Semester</label>
+                  <select id="m3_sem">
+                    <option disabled selected value="">-- Choose --</option>
+                    <option value="S1">S1</option>
+                    <option value="S2">S2</option>
+                    <option value="S3">S3</option>
+                    <option value="S4">S4</option>
+                    <option value="S5">S5</option>
+                    <option value="S6">S6</option>
+                    <option value="S7">S7</option>
+                    <option value="S8">S8</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="m3_email">Email ID</label>
+                  <input type="email" id="m3_email" />
+                </div>
+                <div class="field">
+                  <label for="m3_phone">Mobile Number</label>
+                  <input type="number" id="m3_phone" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-grid one-col mt-3">
               <div class="field">
                 <label for="ideatitle">Idea Title</label>
                 <input type="text" id="ideatitle" required />
@@ -189,7 +336,7 @@
 
             <div class="submit-wrap">
               <button type="submit" id="submit" class="submit-btn">
-                Submit Idea
+                Submit Group Idea
               </button>
             </div>
           </form>
